@@ -1,0 +1,33 @@
+<%= form_for :person, url: people_path do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%=pluralize(@person.errors.count, "")%> fel hindrade skapandet av denna person:
+      </h2>
+      <ul>
+        <% @person.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :namn %><br>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label :personnummer %><br>
+    <%= f.text_field :personnbr %>
+  </p>
+
+  <p>
+    <%= f.label :lånekortsnummer %><br>
+    <%= f.text_field :cardnbr %>
+  </p>
+  
+  <p>
+    <%= f.submit "Spara användare"%>
+  </p>
+<% end %>

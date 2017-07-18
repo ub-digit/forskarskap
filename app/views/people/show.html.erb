@@ -1,0 +1,19 @@
+
+<p>
+  <strong>Namn:</strong>
+  <%= @person.name %>
+</p>
+ 
+<p>
+  <strong>Personnummer:</strong>
+  <%= @person.personnbr %>
+</p>
+
+<p>
+  <strong>Lånekortsnummer:</strong>
+  <%= @person.cardnbr %>
+</p>
+
+<%= link_to 'Tillbaka', people_path %> |
+
+<%= link_to 'Ändra', edit_person_path(@person)%>
