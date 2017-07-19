@@ -14,6 +14,23 @@
   <%= @person.cardnbr %>
 </p>
 
+<p>
+  <strong>Medlem sedan: </strong>
+  <%= @person.registrationDate %>
+</p>
+
+
+<p>
+  <strong>ID: </strong>
+  <%= @person.id %>
+</p>
+
+
+
 <%= link_to 'Tillbaka', people_path %> |
+
+<%= link_to 'Ta bort', person_path(@person),
+              method: :delete,
+              data: { confirm: 'Bekräfta borttagning' } %> |
 
 <%= link_to 'Ändra', edit_person_path(@person)%>
