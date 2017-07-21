@@ -35,6 +35,7 @@ class PeopleController < ApplicationController
   
   def show
     @person = Person.find(params[:id])
+    @locker = Locker.where(id: @person.locker_id).first
     @nbrOfVisits = @person.visits.count
   end
   
@@ -59,6 +60,7 @@ class PeopleController < ApplicationController
     end
   end
   
+  
   def update
     @person = Person.find(params[:id])
  
@@ -69,15 +71,22 @@ class PeopleController < ApplicationController
     end
   end
   
+  
   def destroy
     @person = Person.find(params[:id])
-    @person.destroy
+    
+    @person.visits.each do |visit|
+      visit.destroy
+    end
+        
+    @person.delete
     
     redirect_to people_path
   end
   
+  
   private
     def person_params
-      params.require(:person).permit(:name, :personnbr, :cardnbr)
+      params.require(:person).permit(:name, :personnbr, :cardnbr, :locker_id)
     end
 end

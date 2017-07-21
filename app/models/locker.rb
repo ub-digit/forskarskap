@@ -8,22 +8,19 @@ class Locker < ApplicationRecord
   
   
   def self.listAvailable()
-    @people = Person.all
-    @lockers = Locker.all
-    
-    @people.each do |person|
-      @locker = Locker.where(id: person.locker_id)
-      if @locker
-        @lockers.delete(@locker)
+    @available = Array.new
+    Locker.all.each do |locker|
+      if(Locker.isAvailable(locker.id))
+        @available.push(locker)
       end
     end
-    return @lockers
+    @available.sort! {|a,b| a.number.downcase <=> b.number.downcase}
+    return @available
   end
   
   
-  def self.isAvailable(nbr)
-    @locker = Locker.where(number: nbr)
-    @person = Person.where(locker_id: @locker.id)
+  def self.isAvailable(id)
+    @person = Person.where(locker_id: id).first
     if(@person)
       return false
     else

@@ -31,7 +31,8 @@
   </p>
 
   <p>
-    <%= f.collection_select :locker_id, @available, :id, :number, include_blank: true %>
+    <%= f.label :Forskarskåp %><br>
+    <%= f.collection_select :locker_id, @available, :id, :number %>
   </p>
   
   <p>
