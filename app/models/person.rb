@@ -1,4 +1,5 @@
 class Person < ApplicationRecord
+  belongs_to :locker, optional: true
   has_many :visits
   
   validates_presence_of :name, :message => "Användare måste ha ett namn"

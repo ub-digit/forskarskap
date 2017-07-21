@@ -1,5 +1,5 @@
 class VisitsController < ApplicationController
-  $message = "HI THERE"
+  $message = ""
   
   def new
     @message = $message
@@ -13,15 +13,21 @@ class VisitsController < ApplicationController
       
       if @person != nil
         
-        @duplicate = Visit.where(["date = ? and person_id = ?", Date.today, @person.id]).take
-   
-        if @duplicate
-          $message = "Du har redan registrerat ditt besök för idag"
+        if @person.locker_id != nil
+        
+          @duplicate = Visit.where(["date = ? and person_id = ?", Date.today, @person.id]).take
+
+          if @duplicate
+            $message = "Du har redan registrerat ditt besök för idag"
+          else
+            @visit = @person.visits.new
+            @visit.date = Date.today
+            @visit.save
+            $message = "Ditt besök är nu registrerat"
+          end
+          
         else
-          @visit = @person.visits.new
-          @visit.date = Date.today
-          @visit.save
-          $message = "Ditt besök är nu registrerat"
+          $message = "Ett fel uppstod. Detta lånekort har inte ett forskarskåp registrerat. Vänligen kontakta ansvarig personal"
         end
 
         

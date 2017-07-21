@@ -29,6 +29,10 @@
     <%= f.label :lånekortsnummer %><br>
     <%= f.text_field :cardnbr %>
   </p>
+
+  <p>
+    <%= f.collection_select :locker_id, @available, :id, :number, include_blank: true %>
+  </p>
   
   <p>
     <%= f.submit "Spara användare"%>

@@ -33,20 +33,19 @@ class PeopleController < ApplicationController
  
   end
   
-  
-  
-  
-  
   def show
     @person = Person.find(params[:id])
+    @nbrOfVisits = @person.visits.count
   end
   
   def new
     @person=Person.new
+    @available = Locker.listAvailable()
   end
   
   def edit
     @person = Person.find(params[:id])
+    @available = Locker.listAvailable()
   end
   
   def create

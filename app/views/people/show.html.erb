@@ -15,15 +15,31 @@
 </p>
 
 <p>
-  <strong>Medlem sedan: </strong>
+  <strong>Medlem sedan:</strong>
   <%= @person.registrationDate %>
 </p>
 
 
 <p>
-  <strong>ID: </strong>
-  <%= @person.id %>
+  <strong>Inskrivningsdatum:</strong>
+  <%= @person.registrationDate %>
 </p>
+
+<p>
+  <% if @person.locker_id %>
+  
+    <strong>Locker:</strong>
+    <%= @person.locker_id %>
+  <% else %>
+    <strong> Denna användare har inte ett forskarskåp</strong>
+  <% end %>
+</p>
+
+<p>
+  <strong>Totalt antal besök:</strong>
+  <%= @nbrOfVisits %>
+</p>
+
 
 <table>
   <tr>

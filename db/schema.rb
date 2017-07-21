@@ -10,13 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719132409) do
+ActiveRecord::Schema.define(version: 20170721104225) do
+
+  create_table "lockers", force: :cascade do |t|
+    t.string "number"
+  end
 
   create_table "people", force: :cascade do |t|
     t.string "name"
     t.string "personnbr"
     t.string "cardnbr"
     t.date "registrationDate"
+    t.integer "locker_id"
+    t.index ["locker_id"], name: "index_people_on_locker_id"
   end
 
   create_table "visits", force: :cascade do |t|
