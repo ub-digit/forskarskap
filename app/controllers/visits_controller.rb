@@ -13,7 +13,7 @@ class VisitsController < ApplicationController
       
       if @person != nil
         
-        @duplicate = Visit.where(date: Date.today).take
+        @duplicate = Visit.where(["date = ? and person_id = ?", Date.today, @person.id]).take
    
         if @duplicate
           $message = "Du har redan registrerat ditt besök för idag"
