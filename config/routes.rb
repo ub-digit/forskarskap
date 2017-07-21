@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'checkin/index'
+  get '/visits/new'
   
-  resources :people do
-    resources :visits
-  end
+  resources :people
+  resources :visits
+
   
-  root 'checkin#index'
+  root 'visits#new'
 end

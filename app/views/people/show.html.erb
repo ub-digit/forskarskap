@@ -25,6 +25,18 @@
   <%= @person.id %>
 </p>
 
+<table>
+  <tr>
+    <th>Besök:</th>
+  </tr>
+ 
+  <% @person.visits.each do |visit| %>
+    <tr>
+      <td><%= visit.date %></td>
+    </tr>
+  <% end %>
+</table>
+
 
 
 <%= link_to 'Tillbaka', people_path %> |

@@ -1,5 +1,5 @@
 class Person < ApplicationRecord
-  has_many :comments
+  has_many :visits
   
   validates_presence_of :name, :message => "Användare måste ha ett namn"
   validates_presence_of :personnbr, :message => "Användare måste ha ett personnummer"
