@@ -6,6 +6,7 @@ class VisitsController < ApplicationController
   end
   
   
+  
   def create
 
     if params[:cardnbr].present?
@@ -30,7 +31,6 @@ class VisitsController < ApplicationController
           $message = "Ett fel uppstod. Detta lånekort har inte ett forskarskåp registrerat. Vänligen kontakta ansvarig personal"
         end
 
-        
       else
         $message = "Ett fel uppstod. Detta lånekort finns inte registerat i systemet"
       end
@@ -38,8 +38,8 @@ class VisitsController < ApplicationController
     else
       $message = "Ett fel uppstod. Detta lånekort finns inte registerat i systemet"
     end
+    
     redirect_to action: :new
-     
   end
   
 

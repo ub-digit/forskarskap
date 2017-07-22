@@ -1,5 +1,4 @@
-<h1>Personer:</h1>
-
+<h1>Forskarskåpshanteraren:</h1>
 
 <%= link_to 'Lägg till ny person', new_person_path %>
 
@@ -28,8 +27,19 @@
       <td><%= person.personnbr %></td>
       <td><%= person.cardnbr %></td>
       <td><%= @locker.number %></td>
-      <td><%= link_to 'Visa', person_path(person) %></td>
-      
+      <td>
+        <%= form_tag(people_path, :method => "get") do %>
+          <%= hidden_field_tag :show, value = person.id %>
+          <%= submit_tag "Visa"  %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
+
+
+
+<% if @selected %>
+  <%= render 'show' %>
+<% end %>
+

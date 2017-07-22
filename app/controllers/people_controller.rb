@@ -4,9 +4,7 @@ class PeopleController < ApplicationController
   
   def index
     @people = Person.all
-    
-    puts params[:search]
-
+  
     if params[:search].blank?
        
       if params[:search_by] == "Namn"
@@ -31,6 +29,12 @@ class PeopleController < ApplicationController
         @people = Person.search_locker(params[:search])
       end
 
+    end
+    
+    if params[:show]
+      @selected = Person.find(params[:show])
+      @locker = Locker.where(id: @selected.locker_id).first
+      @nbrOfVisits = @selected.visits.count
     end
  
   end
