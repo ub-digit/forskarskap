@@ -4,23 +4,13 @@ class PeopleController < ApplicationController
   
   def index
     @people = Person.all
+    
+    puts params[:search]
 
-    if params[:search]
-      
+    if params[:search].blank?
+       
       if params[:search_by] == "Namn"
-        @people = Person.search_name(params[:search]).order(:name)
-      elsif params[:search_by] == "Personnummer"
-        @people = Person.search_personnbr(params[:search]).order(:personnbr)
-      elsif params[:search_by] == "Lånekortsnummer"
-        @people = Person.search_cardnbr(params[:search]).order(:cardnbr)
-      else
-        @people = Person.all.order(:name)
-      end
-      
-    else
-      
-      if params[:search_by] == "Namn"
-        @people = Person.all.order(:name)
+        @found = Person.all.order(:name) 
       elsif params[:search_by] == "Personnummer"
         @people = Person.all.order(:personnbr)
       elsif params[:search_by] == "Lånekortsnummer"
@@ -28,10 +18,23 @@ class PeopleController < ApplicationController
       else
         @people = Person.all.order(:name)
       end
-      
+  
+    else
+
+      if params[:search_by] == "Namn"
+        @people = Person.search_name(params[:search]).order(:name)
+      elsif params[:search_by] == "Personnummer"
+        @people = Person.search_personnbr(params[:search]).order(:personnbr)
+      elsif params[:search_by] == "Lånekortsnummer"
+        @people = Person.search_cardnbr(params[:search]).order(:cardnbr)
+      elsif params[:search_by] == "Forskarskåp"
+        @people = Person.search_locker(params[:search])
+      end
+
     end
  
   end
+  
   
   def show
     @person = Person.find(params[:id])

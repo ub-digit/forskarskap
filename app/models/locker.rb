@@ -2,11 +2,7 @@ class Locker < ApplicationRecord
   has_one :person
   
   validates_uniqueness_of :number
-  
-  
-  
-  
-  
+
   def self.listAvailable()
     @available = Array.new
     Locker.all.each do |locker|

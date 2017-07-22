@@ -26,5 +26,22 @@ class Person < ApplicationRecord
     where("cardnbr LIKE ?", "%#{search}%")
   end
   
+  def self.search_locker(search)
+    @lockers = Locker.where("number LIKE ?", "%#{search}%")
+    @people = Array.new
+    
+    @lockers.each do |locker|
+      @person = Person.where(locker_id: locker.id).first
+      if @person
+        @people.push(@person)
+      end
+    end
+    
+    return @people
+  end
   
+
+  
+  
+ 
 end
