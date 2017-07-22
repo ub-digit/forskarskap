@@ -5,9 +5,9 @@
 
 <%= form_tag(people_path, :method => "get", id: "search-form") do %>
 
-  <%= select_tag :search_by, options_for_select(['Namn','Personnummer','Lånekortsnummer','Forskarskåp']) %>
+  <%= select_tag :search_by, options_for_select(['Namn','Personnummer','Lånekortsnummer','Forskarskåp'], @search_by) %>
 
-  <%= text_field_tag :search, params[:search], placeholder: "Sök" %>
+  <%= text_field_tag :search, @search, placeholder: "Sök" %>
   <%= submit_tag "Search" %>
 <% end %>
 

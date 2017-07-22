@@ -1,34 +1,45 @@
 class PeopleController < ApplicationController
-  
+  $search_by = ""
+  $search = ""
   
   
   def index
     @people = Person.all
-  
+    
+    if params[:search_by]
+      $search_by = params[:search_by]
+    end
+    if params[:search]
+      $search = params[:search]
+    end
+    
+    @search_by = $search_by
+    @search = $search
+    
+    
     if params[:search].blank?
-       
-      if params[:search_by] == "Namn"
+      if $search_by == "Namn"
         @found = Person.all.order(:name) 
-      elsif params[:search_by] == "Personnummer"
+      elsif $search_by == "Personnummer"
         @people = Person.all.order(:personnbr)
-      elsif params[:search_by] == "Lånekortsnummer"
+      elsif $search_by == "Lånekortsnummer"
         @people = Person.all.order(:cardnbr)
       else
-        @people = Person.all.order(:name)
+        @people = Person.all.order(:locker_id)
       end
-  
+      
     else
 
-      if params[:search_by] == "Namn"
+      if $search_by == "Namn"
         @people = Person.search_name(params[:search]).order(:name)
-      elsif params[:search_by] == "Personnummer"
+      elsif $search_by == "Personnummer"
         @people = Person.search_personnbr(params[:search]).order(:personnbr)
-      elsif params[:search_by] == "Lånekortsnummer"
+      elsif $search_by == "Lånekortsnummer"
         @people = Person.search_cardnbr(params[:search]).order(:cardnbr)
-      elsif params[:search_by] == "Forskarskåp"
+      elsif $search_by == "Forskarskåp"
         @people = Person.search_locker(params[:search])
       end
-
+        
     end
     
     if params[:show]
@@ -36,15 +47,15 @@ class PeopleController < ApplicationController
       @locker = Locker.where(id: @selected.locker_id).first
       @nbrOfVisits = @selected.visits.count
     end
- 
+
   end
   
   
-  def show
-    @person = Person.find(params[:id])
-    @locker = Locker.where(id: @person.locker_id).first
-    @nbrOfVisits = @person.visits.count
-  end
+  #def show
+  #  @person = Person.find(params[:id])
+  #  @locker = Locker.where(id: @person.locker_id).first
+  #  @nbrOfVisits = @person.visits.count
+  #end
   
   def new
     @person=Person.new
