@@ -17,7 +17,7 @@ class PeopleController < ApplicationController
     @search = $search
     
     
-    if params[:search].blank?
+    if $search.blank?
       if $search_by == "Namn"
         @found = Person.all.order(:name) 
       elsif $search_by == "Personnummer"
@@ -31,13 +31,13 @@ class PeopleController < ApplicationController
     else
 
       if $search_by == "Namn"
-        @people = Person.search_name(params[:search]).order(:name)
+        @people = Person.search_name($search).order(:name)
       elsif $search_by == "Personnummer"
-        @people = Person.search_personnbr(params[:search]).order(:personnbr)
+        @people = Person.search_personnbr($search).order(:personnbr)
       elsif $search_by == "Lånekortsnummer"
-        @people = Person.search_cardnbr(params[:search]).order(:cardnbr)
+        @people = Person.search_cardnbr($search).order(:cardnbr)
       elsif $search_by == "Forskarskåp"
-        @people = Person.search_locker(params[:search])
+        @people = Person.search_locker($search)
       end
         
     end
