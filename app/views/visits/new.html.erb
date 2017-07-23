@@ -1,12 +1,32 @@
 <h1> NYTT BESÖK: </h1>
 
-<p>
-  <%= @message %>
-</p>
 
-<%= form_tag('/visits', :method => "create") do %>
-  <%= text_field_tag :cardnbr, params[:cardnbr], placeholder: "Lånekortsnummer" %>
-  <%= submit_tag "Check in" %>
+<div id = checkin_form >
+  
+  <% if @type == "confirmation" %>
+    <div id = confirmation> 
+      <p> Ditt besök är nu registrerat </p>
+    </div>
+  <% elsif @type == "redundant" %>
+    <div id = redundant> 
+      <p> Du har redan registrerat ditt besök för idag </p>
+    </div>
+  <% elsif @type == "error" %>
+    <div id = error> 
+      <p> Ett fel uppstod. Detta lånekort finns inte registerat i systemet </p>
+    </div>
+  <% elsif @type =="noLockerError" %>
+    <div id = error> 
+      <p> Ett fel uppstod. Du saknar skåp, vänligen kontakta personalen</p>
+    </div>
+  <% end %>
+  
+  
 
-<% end %>
+  <%= form_tag('/visits', :method => "create") do %>
+    <%= text_field_tag :cardnbr, params[:cardnbr], placeholder: "Lånekortsnummer" %>
+    <%= submit_tag "Check in" %>
 
+  <% end %>
+
+</div>

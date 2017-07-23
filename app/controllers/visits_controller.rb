@@ -1,8 +1,8 @@
 class VisitsController < ApplicationController
-  $message = ""
+  $type = ""
   
   def new
-    @message = $message
+    @type = $type
   end
   
   
@@ -19,24 +19,25 @@ class VisitsController < ApplicationController
           @duplicate = Visit.where(["date = ? and person_id = ?", Date.today, @person.id]).take
 
           if @duplicate
-            $message = "Du har redan registrerat ditt besök för idag"
+            $type = "redundant"
+            
           else
             @visit = @person.visits.new
             @visit.date = Date.today
             @visit.save
-            $message = "Ditt besök är nu registrerat"
+            $type = "confirmation"
           end
           
         else
-          $message = "Ett fel uppstod. Detta lånekort har inte ett forskarskåp registrerat. Vänligen kontakta ansvarig personal"
+          $type = "noLockerError"
         end
 
       else
-        $message = "Ett fel uppstod. Detta lånekort finns inte registerat i systemet"
+        $type = "error"
       end
 
     else
-      $message = "Ett fel uppstod. Detta lånekort finns inte registerat i systemet"
+      $type = "error"
     end
     
     redirect_to action: :new
