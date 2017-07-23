@@ -1,4 +1,4 @@
-<h1> Håll upp ditt lånekort för läsaren </h1>
+<h1 id = "checkin_title" > Håll upp ditt lånekort för läsaren </h1>
 
 
 
@@ -7,19 +7,19 @@
     
   <% if @type == "confirmation" %>
     <div id = confirmation> 
-      <p> Ditt besök är nu registrerat </p>
+      <p id= "msg" > Ditt besök är nu registrerat </p>
     </div>
   <% elsif @type == "redundant" %>
     <div id = redundant> 
-      <p> Du har redan registrerat ditt besök för idag </p>
+      <p id= "msg" > Du har redan registrerat ditt besök för idag </p>
     </div>
   <% elsif @type == "error" %>
     <div id = error> 
-      <p> Ett fel uppstod. Detta lånekort finns inte registerat i systemet </p>
+      <p id= "msg" > Ett fel uppstod. Detta lånekort finns inte registerat i systemet </p>
     </div>
   <% elsif @type =="noLockerError" %>
     <div id = error> 
-      <p> Ett fel uppstod. Du saknar skåp, vänligen kontakta personalen</p>
+      <p id= "msg" > Ett fel uppstod. Du saknar skåp, vänligen kontakta personalen</p>
     </div>
   <% end %>
     
