@@ -7,16 +7,19 @@
   float: left;
   width: 30%;
   min-height: 500px;
+  
   border-right: 3px solid;
+  border-left: 3px solid;
   
   -webkit-border-image: 
-    -webkit-linear-gradient(white, lightgray, white) 1 100%;
+    -webkit-linear-gradient(rgba(0,0,0,0), gray, rgba(0,0,0,0)) 1 100%;
   -moz-border-image:
-    -moz-linear-gradient(white, lightgray, white) 1 100%;    
+    -moz-linear-gradient(rgba(0,0,0,0), gray, rgba(0,0,0,0)) 1 100%;    
   -o-border-image:
-    -o-linear-gradient(white, lightgray, white) 1 100%;
+    -o-linear-gradient(rgba(0,0,0,0), gray, rgba(0,0,0,0)) 1 100%;
   border-image:
-    linear-gradient(white, lightgray, white) 1 100%;
+    linear-gradient(rgba(0,0,0,0), gray, rgba(0,0,0,0)) 1 100%;
+
 }
 
 #details_side{
