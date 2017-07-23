@@ -1,8 +1,10 @@
-<h1> NYTT BESÖK: </h1>
+<h1> Håll upp ditt lånekort för läsaren </h1>
 
 
-<div id = checkin_form >
+
   
+<div id = "message_area">
+    
   <% if @type == "confirmation" %>
     <div id = confirmation> 
       <p> Ditt besök är nu registrerat </p>
@@ -20,8 +22,11 @@
       <p> Ett fel uppstod. Du saknar skåp, vänligen kontakta personalen</p>
     </div>
   <% end %>
+    
+</div>
   
   
+<div id = checkin_form >
 
   <%= form_tag('/visits', :method => "create") do %>
     <%= text_field_tag :cardnbr, params[:cardnbr], placeholder: "Lånekortsnummer" %>
