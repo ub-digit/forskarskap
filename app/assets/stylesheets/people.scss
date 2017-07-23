@@ -5,8 +5,21 @@
 
 #index_side{
   float: left;
+  width: 30%;
+  min-height: 500px;
+  border-right: 3px solid;
+  
+  -webkit-border-image: 
+    -webkit-linear-gradient(white, lightgray, white) 1 100%;
+  -moz-border-image:
+    -moz-linear-gradient(white, lightgray, white) 1 100%;    
+  -o-border-image:
+    -o-linear-gradient(white, lightgray, white) 1 100%;
+  border-image:
+    linear-gradient(white, lightgray, white) 1 100%;
 }
 
 #details_side{
   float: right;
+  width: 60%;
 }
