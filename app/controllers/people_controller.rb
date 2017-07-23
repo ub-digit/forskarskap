@@ -1,6 +1,8 @@
 class PeopleController < ApplicationController
   $search_by = ""
   $search = ""
+  $selected
+  
   
   
   def index
@@ -12,9 +14,16 @@ class PeopleController < ApplicationController
     if params[:search]
       $search = params[:search]
     end
+    if params[:show]
+      $selected = Person.find(params[:show])
+    end
     
     @search_by = $search_by
     @search = $search
+    
+    @selected = $selected
+    @selectedLocker = Locker.where(id: @selected.locker_id).first
+    @nbrOfVisits = @selected.visits.count
     
     
     if $search.blank?
@@ -42,11 +51,7 @@ class PeopleController < ApplicationController
         
     end
     
-    if params[:show]
-      @selected = Person.find(params[:show])
-      @locker = Locker.where(id: @selected.locker_id).first
-      @nbrOfVisits = @selected.visits.count
-    end
+
 
   end
   
@@ -64,7 +69,10 @@ class PeopleController < ApplicationController
   
   def edit
     @person = Person.find(params[:id])
+    @personsLocker = Locker.find(@person.locker_id)
     @available = Locker.listAvailable()
+    @available.push(@personsLocker)
+    @available.sort! {|a,b| a.number.downcase <=> b.number.downcase}
   end
   
   def create

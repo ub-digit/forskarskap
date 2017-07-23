@@ -24,7 +24,8 @@
   <% if @selected.locker_id %>
   
     <strong>Locker:</strong>
-    <%= @locker.number %>
+    <%= @selectedLocker.number %>
+    <%= @selected.locker_id %>
   
   <% else %>
     <strong> Denna användare har inte ett forskarskåp</strong>
