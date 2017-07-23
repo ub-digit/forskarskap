@@ -3,13 +3,22 @@ class Locker < ApplicationRecord
   
   validates_uniqueness_of :number
 
-  def self.listAvailable()
+  
+  
+  def self.listAvailable(lockerId)
     @available = Array.new
     Locker.all.each do |locker|
       if(Locker.isAvailable(locker.id))
         @available.push(locker)
       end
     end
+    
+    if lockerId != nil
+      puts lockerId
+      @personsLocker = Locker.find(lockerId)
+      @available.push(@personsLocker)
+    end
+    
     @available.sort! {|a,b| a.number.downcase <=> b.number.downcase}
     return @available
   end

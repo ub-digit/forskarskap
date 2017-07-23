@@ -11,19 +11,24 @@ class PeopleController < ApplicationController
     if params[:search_by]
       $search_by = params[:search_by]
     end
+    
     if params[:search]
       $search = params[:search]
     end
+    
     if params[:show]
-      $selected = Person.find(params[:show])
+      $selected = params[:show]
     end
     
     @search_by = $search_by
     @search = $search
     
-    @selected = $selected
-    @selectedLocker = Locker.where(id: @selected.locker_id).first
-    @nbrOfVisits = @selected.visits.count
+    if Person.exists?($selected) 
+      @selected = Person.find($selected)
+      @selectedLocker = Locker.where(id: @selected.locker_id).first
+      @nbrOfVisits = @selected.visits.count
+    end
+
     
     
     if $search.blank?
@@ -50,37 +55,27 @@ class PeopleController < ApplicationController
       end
         
     end
-    
-
 
   end
   
-  
-  #def show
-  #  @person = Person.find(params[:id])
-  #  @locker = Locker.where(id: @person.locker_id).first
-  #  @nbrOfVisits = @person.visits.count
-  #end
   
   def new
     @person=Person.new
-    @available = Locker.listAvailable()
   end
+  
   
   def edit
     @person = Person.find(params[:id])
-    @personsLocker = Locker.find(@person.locker_id)
-    @available = Locker.listAvailable()
-    @available.push(@personsLocker)
-    @available.sort! {|a,b| a.number.downcase <=> b.number.downcase}
   end
+  
   
   def create
     @person = Person.new(person_params)
     @person.registrationDate = Date.today
  
     if @person.save
-      redirect_to @person
+      $selected = @person.id
+      redirect_to people_path
     else
       render 'new'
     end
@@ -91,7 +86,8 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
  
     if @person.update(person_params)
-      redirect_to @person
+      $selected = @person.id
+      redirect_to people_path
     else
       render 'edit'
     end

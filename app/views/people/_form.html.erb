@@ -32,6 +32,7 @@
 
   <p>
     <%= f.label :Forskarskåp %><br>
+    <% @available = Locker.listAvailable(@person.locker_id) %>
     <%= f.collection_select :locker_id, @available, :id, :number %>
   </p>
   
