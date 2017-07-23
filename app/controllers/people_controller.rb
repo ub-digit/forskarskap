@@ -88,7 +88,6 @@ class PeopleController < ApplicationController
     end
   end
   
-  c
   def update
     @person = Person.find(params[:id])
  

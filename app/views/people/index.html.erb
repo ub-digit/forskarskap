@@ -3,43 +3,48 @@
 <%= link_to 'Lägg till ny person', new_person_path %>
 
 
-<%= form_tag(people_path, :method => "get", id: "search-form") do %>
+<div id = "index_side">
 
-  <%= select_tag :search_by, options_for_select(['Namn','Personnummer','Lånekortsnummer','Forskarskåp'], @search_by) %>
+  <%= form_tag(people_path, :method => "get", id: "search-form") do %>
 
-  <%= text_field_tag :search, @search, placeholder: "Sök" %>
-  <%= submit_tag "Search" %>
-<% end %>
+    <%= select_tag :search_by, options_for_select(['Namn','Personnummer','Lånekortsnummer','Forskarskåp'], @search_by) %>
 
-
-<table>
-  <tr>
-    <th>Namn</th>
-    <th>Personnummer</th>
-    <th>Kortnummer</th>
-    <th>Forskarskåp</th>
-  </tr>
- 
-  <% @people.each do |person| %>
-    <% @locker = Locker.find(person.locker_id) %>
-    <tr>
-      <td><%= person.name %></td>
-      <td><%= person.personnbr %></td>
-      <td><%= person.cardnbr %></td>
-      <td><%= @locker.number %></td>
-      <td>
-        <%= form_tag(people_path, :method => "get") do %>
-          <%= hidden_field_tag :show, value = person.id %>
-          <%= submit_tag "Visa"  %>
-        <% end %>
-      </td>
-    </tr>
+    <%= text_field_tag :search, @search, placeholder: "Sök" %>
+    <%= submit_tag "Search" %>
   <% end %>
-</table>
 
 
+  <table>
+    <tr>
+      <th>Namn</th>
+      <th>Personnummer</th>
+      <th>Kortnummer</th>
+      <th>Forskarskåp</th>
+    </tr>
 
-<% if @selected != nil %>
-  <%= render 'show' %>
-<% end %>
+    <% @people.each do |person| %>
+      <% @locker = Locker.find(person.locker_id) %>
+      <tr>
+        <td><%= person.name %></td>
+        <td><%= person.personnbr %></td>
+        <td><%= person.cardnbr %></td>
+        <td><%= @locker.number %></td>
+        <td>
+          <%= form_tag(people_path, :method => "get") do %>
+            <%= hidden_field_tag :show, value = person.id %>
+            <%= submit_tag "Visa"  %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>
+<div id = "details_side">
+
+  <% if @selected != nil %>
+    <%= render 'show' %>
+  <% end %>
+  
+</div>
 
