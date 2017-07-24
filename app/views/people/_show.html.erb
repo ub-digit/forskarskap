@@ -1,55 +1,60 @@
+<div id = "personal_info">
 
-<p>
-  <strong>Namn:</strong>
-  <%= @selected.name %>
-</p>
- 
-<p>
-  <strong>Personnummer:</strong>
-  <%= @selected.personnbr %>
-</p>
+  <p>
+    <strong>Namn:</strong>
+    <%= @selected.name %>
+  </p>
 
-<p>
-  <strong>Lånekortsnummer:</strong>
-  <%= @selected.cardnbr %>
-</p>
+  <p>
+    <strong>Personnummer:</strong>
+    <%= @selected.personnbr %>
+  </p>
 
-<p>
-  <strong>Inskrivningsdatum:</strong>
-  <%= @selected.registrationDate %>
-</p>
+  <p>
+    <strong>Lånekortsnummer:</strong>
+    <%= @selected.cardnbr %>
+  </p>
+
+  <p>
+    <strong>Inskrivningsdatum:</strong>
+    <%= @selected.registrationDate %>
+  </p>
 
 
-<p>
-  <% if @selected.locker_id %>
+  <p>
+    <% if @selected.locker_id %>
+
+      <strong>Locker:</strong>
+      <%= @selectedLocker.number %>
+
+    <% else %>
+      <strong> Denna användare har inte ett forskarskåp</strong>
+    <% end %>
+  </p>
   
-    <strong>Locker:</strong>
-    <%= @selectedLocker.number %>
+  <p>
+    <strong>Totalt antal besök:</strong>
+    <%= @nbrOfVisits %>
+  </p>
+
   
-  <% else %>
-    <strong> Denna användare har inte ett forskarskåp</strong>
-  <% end %>
-</p>
+</div>
 
-
-<p>
-  <strong>Totalt antal besök:</strong>
-  <%= @nbrOfVisits %>
-</p>
-
-
-<table>
-  <tr>
-    <th>Besök:</th>
-  </tr>
- 
-  <% @selected.visits.each do |visit| %>
+<div id = "visits_info">
+  
+  <table id = "visits_table">
     <tr>
-      <td><%= visit.date %></td>
+      <th class="visits">Besök:</th>
     </tr>
-  <% end %>
-</table>
 
+    <% @selected.visits.each do |visit| %>
+      <tr>
+        <td><%= visit.date %></td>
+      </tr>
+    <% end %>
+  </table>
+
+</div>
 
 
 <%= link_to 'Ta bort', person_path(@selected),

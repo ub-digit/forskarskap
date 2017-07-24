@@ -1,6 +1,7 @@
-<h1>Forskarskåpshanteraren:</h1>
-
-<%= link_to 'Lägg till ny person', new_person_path %>
+<div id = "header">
+  <h1 id = "header_title">Forskarskåpshanteraren</h1>
+  <%= link_to 'Lägg till ny person', new_person_path, :style=> 'float: right; margin-right: 20px; margin-bottom: 10px;' %>
+</div>
 
 
 <div id = "index_side">
@@ -24,7 +25,7 @@
 
     <% @people.each do |person| %>
       <% @locker = Locker.find(person.locker_id) %>
-      <tr>
+      <tr class = "index">
         <td><%= person.name %></td>
         <td><%= person.personnbr %></td>
         <td><%= person.cardnbr %></td>
