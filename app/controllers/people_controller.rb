@@ -79,15 +79,42 @@ class PeopleController < ApplicationController
   
   def create
     @person = Person.new(person_params)
-    @person.registrationDate = Date.today
- 
-    if @person.save
-      $selected = @person.id
-      redirect_to people_path
+    
+    @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?pnr=" + @person.personnbr + "&key=!kk889fr!"
+    @gundaPerson = @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
+    
+    if @gundaPerson[:name]
+      @person.name = @gundaPerson[:name]
+      @person.cardnbr = @gundaPerson[:card_number]
+      @person.registrationDate = Date.today
+     
+      if @person.save
+        $selected = @person.id
+        redirect_to people_path
+      else
+        puts "SOMETING IS WRONG WITH THE DATA"
+        
+        render 'new'
+      end
+      
     else
+      puts "THAT PERSON DOESN'T EXIST!"
+      
       render 'new'
     end
+    
+#    @person = Person.new(person_params)
+#    @person.registrationDate = Date.today
+ 
+#    if @person.save
+#      $selected = @person.id
+#      redirect_to people_path
+#    else
+#      render 'new'
+#    end
+    
   end
+  
   
   def update
     @person = Person.find(params[:id])

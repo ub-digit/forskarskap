@@ -41,7 +41,6 @@ class Person < ApplicationRecord
   end
   
   
-  
   def self.findGundaPerson(cardNbr)
     @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?cnr=" + cardNbr + "&key=!kk889fr!"
     @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
@@ -53,7 +52,6 @@ class Person < ApplicationRecord
     else
       return nil
     end
-    
   end
   
 

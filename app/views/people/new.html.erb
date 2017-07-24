@@ -1,5 +1,40 @@
 <h1>Lägg till ny användare</h1>
 
-<%= render 'form' %>
+<%= form_for @person do |f| %>
+  <% if @person.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%=pluralize(@person.errors.count, "")%> fel hindrade skapandet av denna användare:
+      </h2>
+      <ul>
+        <%@person.errors.messages.values.each do |msg| %>
+          <%msg.each do  |m| %>
+            <li><%= m %></li>
+          <%end %>
+        <% end %>
+        
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :Personnummer %><br>
+    <%= f.text_field :personnbr %>
+  </p>
+
+  <p>
+    <%= f.label :Forskarskåp %><br>
+    <% @available = Locker.listAvailable(@person.locker_id) %>
+    <%= f.collection_select :locker_id, @available, :id, :number %>
+  </p>
+  
+  <p>
+    <%= f.submit "Spara användare"%>
+  </p>
+
+<% end %>
+
+
+
 
 <%= link_to 'Tillbaka', people_path %>
