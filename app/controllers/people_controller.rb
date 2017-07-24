@@ -1,5 +1,7 @@
 class PeopleController < ApplicationController
   
+  
+  
   #To keep the search results and the description of a person showing even if you reload the page
   $search_by = ""
   $search = ""
@@ -34,6 +36,8 @@ class PeopleController < ApplicationController
       @selected = Person.find($selected)
       @selectedLocker = Locker.where(id: @selected.locker_id).first
       @nbrOfVisits = @selected.visits.count
+      @countingFrom = Date.today - 30
+      @visitsThisMonth = Visit.where('person_id = ? AND date > ?', @selected.id, @countingFrom).count
     end
 
     

@@ -36,6 +36,13 @@
     <strong>Totalt antal besök:</strong>
     <%= @nbrOfVisits %>
   </p>
+  
+  <p> 
+    <strong> Antal besök denna månaden </strong>
+    (Räknat från <%= @countingFrom %>): 
+    <%= @visitsThisMonth %>
+  </p>
+  
 
   
 </div>
@@ -55,7 +62,6 @@
   </table>
 
 </div>
-
 
 <%= link_to 'Ta bort', person_path(@selected),
               method: :delete,
