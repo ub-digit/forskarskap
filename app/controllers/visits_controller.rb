@@ -10,7 +10,7 @@ class VisitsController < ApplicationController
   def create
 
     if params[:cardnbr].present?
-      @person = Person.where(cardnbr: params[:cardnbr]).take
+      @person = Person.findGundaPerson(params[:cardnbr])
       
       if @person != nil
         

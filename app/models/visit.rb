@@ -9,5 +9,6 @@ class Visit < ApplicationRecord
     where("date EQUALS ? AND person EQUALS ?", "%#{date}%", "%#{person}%")
   end
   
+  
 end
 

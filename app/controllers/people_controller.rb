@@ -1,7 +1,4 @@
 class PeopleController < ApplicationController
-  
-  
-  
   #To keep the search results and the description of a person showing even if you reload the page
   $search_by = ""
   $search = ""
@@ -66,7 +63,7 @@ class PeopleController < ApplicationController
       end
         
     end
-
+    
   end
   
   

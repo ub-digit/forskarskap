@@ -8,7 +8,7 @@ class Person < ApplicationRecord
   validates_uniqueness_of :personnbr, :message => "Användare med detta personnummer existerar redan"
   validates_uniqueness_of :cardnbr, :message => "Användare med detta lånekortsnummer existerar redan"
   
-  validates :personnbr, length: {is: 12 , message: "Personnummret ska vara i formatet ÅÅÅÅMMDDXXXX"}
+  validates :personnbr, length: {is: 10 , message: "Personnummret ska vara i formatet ÅÅMMDDXXXX"}
   
   
   
@@ -38,6 +38,22 @@ class Person < ApplicationRecord
     end
     
     return @people
+  end
+  
+  
+  
+  def self.findGundaPerson(cardNbr)
+    @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?cnr=" + cardNbr + "&key=!kk889fr!"
+    @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
+  
+    if @gundaPerson[:name]
+      @person = Person.where(personnbr: @gundaPerson[:person_number]).first; 
+      @person.update_attributes(:name => @gundaPerson[:name], :cardnbr => @gundaPerson[:card_number])
+      return @person
+    else
+      return nil
+    end
+    
   end
   
 
