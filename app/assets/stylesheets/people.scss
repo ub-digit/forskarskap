@@ -2,14 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-
 #header{
   width: 100%;
   height: 80px;
   margin-bottom: 20px;
   background-color: darkslateblue;
-  color: white;
+  color: #f2f2f2;
   border: 3px solid midnightblue;
 }
 
@@ -27,20 +25,20 @@
   padding: 3px;
   border: 1px outset darkslateblue;
   border-radius: 2px;
-  background-color: lightsteelblue;
+  background-color: #f2f2f2;
   margin-right: 10px;
   margin-top: 45px;
 }
 
 #new_link:hover{
-  background-color: aliceblue;
+  background-color: lightsteelblue;
 }
+
 
 
 #index_side{
   float: left;
-  min-width: 30%;
-  max-width: 39%;
+  max-width: 45%;
   height: 500px;
 
   border-right: 2px solid;
@@ -59,30 +57,39 @@
 #index_list{
   overflow-x: auto;
   max-height: 90%;
+  margin-top: 10px;
 }
 
-tr.index:nth-child(even) {background-color:#f2f2f2}
+tr.index:nth-child(even) {background-color: #f2f2f2}
 
 #index_entry:hover {
   background-color:  lightsteelblue;
 }
 
-#details_side{
-  float: right;
-  width: 60%;
-}
 
+
+//Shows the persons info, like name and lockernumber
 
 #personal_info{
   float: left;
+  margin-left: 10px;
 }
+
+
+header > h2 { 
+  display: inline-block; 
+  margin-bottom: 1px;
+  max-width: 300px;
+}
+
+header span { margin-left: 20px; }
 
 
 //Div that contains the list of visits a person has made
 
 #visits_info{
   float:right;
-  margin-right: 9px;
+  margin-right: 8px;
   height: 400px;
   width: 125px;
   border: 1px solid darkslateblue;
@@ -90,6 +97,7 @@ tr.index:nth-child(even) {background-color:#f2f2f2}
 }
 
 th.visits{
+  border-bottom: 1px solid darkslateblue;
   background-color: darkslateblue;
   color: white;
 }
@@ -102,21 +110,21 @@ th.visits{
 
 
 #bottom_links{
-  background-color: aqua;
   margin-top: 376px;
-  margin-right: 170px;
+  margin-right: 150px;
 }
 
 #delete_link{
   float: left;
+  margin-left: 10px;
   padding: 3px;
   border: 1px outset darkslateblue;
   border-radius: 2px;
-  background-color: lightsteelblue;
+  background-color: #f2f2f2;
 }
 
 #delete_link:hover{
-    background-color: aliceblue;
+    background-color: lightsteelblue;
 }
 
 #edit_link{
@@ -124,10 +132,10 @@ th.visits{
   padding: 3px;
   border: 1px outset darkslateblue;
   border-radius: 2px;
-  background-color: lightsteelblue;
+  background-color: #f2f2f2;
 }
 #edit_link:hover{
-    background-color: aliceblue;
+    background-color: lightsteelblue;
 }
 
 

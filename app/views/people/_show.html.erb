@@ -1,29 +1,24 @@
 <div id = "personal_info">
 
-  <h2>
-    <%= @selected.name %>
-  </h2>
+  <header>
+    <h2> <%= @selected.name %> </h2>
+    <span> Inskrivningsdatum: <%= @selected.registrationDate %> </span>
+  </header>
 
-  <p>
+  <p>&nbsp;
     <strong>Personnummer:</strong>
     <%= @selected.personnbr %>
   </p>
 
-  <p>
+  <p>&nbsp;
     <strong>Lånekortsnummer:</strong>
     <%= @selected.cardnbr %>
   </p>
 
-  <p>
-    <strong>Inskrivningsdatum:</strong>
-    <%= @selected.registrationDate %>
-  </p>
-
-
-  <p>
+  <p>&nbsp;
     <% if @selected.locker_id %>
 
-      <strong>Locker:</strong>
+      <strong>Skåpsnummer:</strong>
       <%= @selectedLocker.number %>
 
     <% else %>
@@ -31,14 +26,16 @@
     <% end %>
   </p>
   
-  <p>
-    <strong>Totalt antal besök:</strong>
+  <br>
+  
+  <p>&nbsp;
+    <strong>Totalt antal besök:</strong> <br>&nbsp;
     <%= @nbrOfVisits %>
   </p>
   
-  <p> 
-    <strong> Antal besök denna månaden </strong>
-    (Räknat från <%= @countingFrom %>): 
+  <p> &nbsp;
+    <strong> Antal besök denna månaden </strong> <br>&nbsp;
+    (Från <%= @countingFrom %>): <br>&nbsp;
     <%= @visitsThisMonth %>
   </p>
   
@@ -48,7 +45,7 @@
 
 <div id = "visits_info">
   
-  <table id = "visits_table">
+  <table id = "visits_table" cellspacing="0">
     <tr>
       <th class="visits">Besök:</th>
     </tr>
@@ -63,14 +60,14 @@
 </div>
 
 <div id = bottom_links>
-
+  
   <div id = delete_link>
     <%= link_to 'Ta bort', person_path(@selected),
                   method: :delete,
                   data: { confirm: 'Bekräfta borttagning' }, :style=> 'text-decoration:none; color: black' %>
   </div>
   <div id = edit_link>
-    <%= link_to 'Ändra', edit_person_path(@selected), :style=> 'text-decoration:none; color: black'%>
+    <%= link_to 'Uppdatera', edit_person_path(@selected), :style=> 'text-decoration:none; color: black'%>
   </div>
   
 </div>

@@ -13,10 +13,10 @@
 
   <%= form_tag(people_path, :method => "get", id: "search-form") do %>
 
-    <%= select_tag :search_by, options_for_select(['Namn','Personnummer','Lånekortsnummer','Forskarskåp'], @search_by) %>
+    <%= select_tag :search_by, options_for_select(['Namn','Personnummer','Lånekortsnummer','Forskarskåp'], @search_by), :style=> 'width: 30%; margin-left: 2px' %>
 
-    <%= text_field_tag :search, @search, placeholder: "Sök" %>
-    <%= submit_tag "Search" %>
+    <%= text_field_tag :search, @search, placeholder: "Sök", :style=> 'width: 50%;' %>
+    <%= submit_tag "Search", :style=> 'width: 16%;' %>
   <% end %>
 
   <div id = "index_list">
@@ -34,7 +34,7 @@
           <td>
             <%= form_tag(people_path, :method => "get") do %>
               <%= hidden_field_tag :show, value = person.id %>
-              <%= submit_tag person.name, :style=> 'background-color: transparent;  width:100%; border: none; font-family: serif; font-size: 16px; text-align: left;' %>
+              <%= submit_tag person.name, :style=> 'background-color: transparent;  width:100%; word-wrap: break-word; border: none; font-family: serif; font-size: 16px; text-align: left;' %>
             <% end %>
           </td>
           
@@ -64,11 +64,9 @@
 
 </div>
 
-<div id = "details_side">
 
-  <% if @selected != nil %>
-    <%= render 'show' %>
-  <% end %>
-  
-</div>
+<% if @selected != nil %>
+  <%= render 'show' %>
+<% end %>
+
 
