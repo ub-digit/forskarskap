@@ -1,6 +1,25 @@
 
-<h1>Ändra personlig information</h1>
- 
-<%= render 'form' %>
+
+
+<p> Personlig information för
+  <strong> <%= @person.name %> </strong>
+  uppdaterades</p> 
+
+
+<%= form_for @person do |f| %>
+
+  <p>
+      Byt forskarskåp: <br>
+      <% @available = Locker.listAvailable(@person.locker_id) %>
+      <%= f.collection_select :locker_id, @available, :id, :number %>
+  </p>
+
+
+  <p>
+    <%= f.submit "Spara forskarskåp"%>
+  </p>
+
+<% end %>
+
  
 <%= link_to 'Tillbaka', people_path %>

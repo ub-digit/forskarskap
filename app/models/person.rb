@@ -54,6 +54,25 @@ class Person < ApplicationRecord
     end
   end
   
+  def self.updatePerson(id)
+    @person = Person.find(id)
+    if @person.personnbr
+      @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?pnr=" + @person.personnbr + "&key=!kk889fr!"
+      @gundaPerson =  eval(Net::HTTP.get(URI(@searchString)))[:patron]
+      
+      
+      if @gundaPerson[:name]
+        @person = Person.where(personnbr: @gundaPerson[:person_number]).first; 
+        @person.update_attributes(:name => @gundaPerson[:name].force_encoding('UTF-8'), :cardnbr => @gundaPerson[:card_number])
+        return @person
+      else
+        return nil
+      end
+      
+    end
+    
+  end
+  
 
   
   
