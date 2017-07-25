@@ -1,9 +1,8 @@
 <div id = "personal_info">
 
-  <p>
-    <strong>Namn:</strong>
+  <h2>
     <%= @selected.name %>
-  </p>
+  </h2>
 
   <p>
     <strong>Personnummer:</strong>
@@ -63,8 +62,15 @@
 
 </div>
 
-<%= link_to 'Ta bort', person_path(@selected),
-              method: :delete,
-              data: { confirm: 'Bekräfta borttagning' } %> |
+<div id = bottom_links>
 
-<%= link_to 'Ändra', edit_person_path(@selected)%>
+  <div id = delete_link>
+    <%= link_to 'Ta bort', person_path(@selected),
+                  method: :delete,
+                  data: { confirm: 'Bekräfta borttagning' }, :style=> 'text-decoration:none; color: black' %>
+  </div>
+  <div id = edit_link>
+    <%= link_to 'Ändra', edit_person_path(@selected), :style=> 'text-decoration:none; color: black'%>
+  </div>
+  
+</div>

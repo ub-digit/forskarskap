@@ -1,6 +1,9 @@
 <div id = "header">
   <h1 id = "header_title">Forskarskåpshanteraren</h1>
-  <%= link_to 'Lägg till ny person', new_person_path, :style=> 'float: right; margin-right: 20px; margin-bottom: 10px;' %>
+  
+  <div id="new_link">
+    <%= link_to 'Lägg till ny person', new_person_path, :style=> 'text-decoration:none; color: darkslateblue' %>
+  </div>
 </div>
 
 
@@ -44,6 +47,7 @@
   </div>
 
 </div>
+
 <div id = "details_side">
 
   <% if @selected != nil %>
