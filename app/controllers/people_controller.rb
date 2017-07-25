@@ -41,7 +41,7 @@ class PeopleController < ApplicationController
     #Sets which people the index is supposed to display
     if $search.blank? #If the search is blank, all people are shown, sorted according to the search-by parameter
       if $search_by == "Namn"
-        @found = Person.all.order(:name) 
+        @people = Person.all.order(:name)  
       elsif $search_by == "Personnummer"
         @people = Person.all.order(:personnbr)
       elsif $search_by == "Lånekortsnummer"
@@ -80,38 +80,31 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new(person_params)
     
-    @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?pnr=" + @person.personnbr + "&key=!kk889fr!"
-    @gundaPerson = @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
-    
-    if @gundaPerson[:name]
-      @person.name = @gundaPerson[:name]
-      @person.cardnbr = @gundaPerson[:card_number]
-      @person.registrationDate = Date.today
-     
-      if @person.save
-        $selected = @person.id
-        redirect_to people_path
+    if !@person.personnbr.blank?
+      @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?pnr=" + @person.personnbr + "&key=!kk889fr!"
+      @gundaPerson = @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
+
+      if @gundaPerson[:name]
+        @person.name = @gundaPerson[:name].force_encoding('UTF-8')
+        @person.cardnbr = @gundaPerson[:card_number]
+        @person.registrationDate = Date.today
+
+        if @person.save
+          $selected = @person.id
+          redirect_to people_path
+        else
+          render 'new'
+        end
+
       else
-        puts "SOMETING IS WRONG WITH THE DATA"
-        
+        @person.errors.add(@person.personnbr, "Person med detta personnummer finns inte registrerat i bibliotekets system")
         render 'new'
       end
       
     else
-      puts "THAT PERSON DOESN'T EXIST!"
-      
+      @person.errors.add(@person.personnbr, "Vänligen fyll i personnummer")
       render 'new'
     end
-    
-#    @person = Person.new(person_params)
-#    @person.registrationDate = Date.today
- 
-#    if @person.save
-#      $selected = @person.id
-#      redirect_to people_path
-#    else
-#      render 'new'
-#    end
     
   end
   

@@ -3,17 +3,16 @@
 <%= form_for @person do |f| %>
   <% if @person.errors.any? %>
     <div id="error_explanation">
-      <h2>
-        <%=pluralize(@person.errors.count, "")%> fel hindrade skapandet av denna användare:
-      </h2>
-      <ul>
+      <table id = "visits_table">
         <%@person.errors.messages.values.each do |msg| %>
-          <%msg.each do  |m| %>
-            <li><%= m %></li>
-          <%end %>
+          <tr>
+            <%msg.each do  |m| %>
+              <td><%= m %></td>
+            <% end %>
+          </tr>
         <% end %>
-        
-      </ul>
+      </table>
+
     </div>
   <% end %>
 
