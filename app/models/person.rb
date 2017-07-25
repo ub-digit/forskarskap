@@ -47,7 +47,7 @@ class Person < ApplicationRecord
   
     if @gundaPerson[:name]
       @person = Person.where(personnbr: @gundaPerson[:person_number]).first; 
-      @person.update_attributes(:name => @gundaPerson[:name], :cardnbr => @gundaPerson[:card_number])
+      @person.update_attributes(:name => @gundaPerson[:name].force_encoding('UTF-8'), :cardnbr => @gundaPerson[:card_number])
       return @person
     else
       return nil

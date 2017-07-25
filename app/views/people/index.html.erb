@@ -4,6 +4,8 @@
 </div>
 
 
+
+
 <div id = "index_side">
 
   <%= form_tag(people_path, :method => "get", id: "search-form") do %>
@@ -14,31 +16,32 @@
     <%= submit_tag "Search" %>
   <% end %>
 
-
-  <table>
-    <tr>
-      <th>Namn</th>
-      <th>Personnummer</th>
-      <th>Kortnummer</th>
-      <th>Forskarskåp</th>
-    </tr>
-
-    <% @people.each do |person| %>
-      <% @locker = Locker.find(person.locker_id) %>
-      <tr class = "index">
-        <td><%= person.name %></td>
-        <td><%= person.personnbr %></td>
-        <td><%= person.cardnbr %></td>
-        <td><%= @locker.number %></td>
-        <td>
-          <%= form_tag(people_path, :method => "get") do %>
-            <%= hidden_field_tag :show, value = person.id %>
-            <%= submit_tag "Visa"  %>
-          <% end %>
-        </td>
+  <div id = "index_list">
+    <table>
+      <tr>
+        <th>Namn</th>
+        <th>Personnummer</th>
+        <th>Kortnummer</th>
+        <th>Forskarskåp</th>
       </tr>
-    <% end %>
-  </table>
+
+      <% @people.each do |person| %>
+        <% @locker = Locker.find(person.locker_id) %>
+        <tr class = "index">
+          <td><%= person.name %></td>
+          <td><%= person.personnbr %></td>
+          <td><%= person.cardnbr %></td>
+          <td><%= @locker.number %></td>
+          <td>
+            <%= form_tag(people_path, :method => "get") do %>
+              <%= hidden_field_tag :show, value = person.id %>
+              <%= submit_tag "Visa"  %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 
 </div>
 <div id = "details_side">
