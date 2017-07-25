@@ -2,7 +2,7 @@
   <h1 id = "header_title">Forskarskåpshanteraren</h1>
   
   <div id="new_link">
-    <%= link_to 'Lägg till ny person', new_person_path, :style=> 'text-decoration:none; color: darkslateblue' %>
+    <%= link_to 'Lägg till ny person', new_person_path, :style=> 'text-decoration:none; color: black' %>
   </div>
 </div>
 
@@ -20,25 +20,41 @@
   <% end %>
 
   <div id = "index_list">
-    <table>
+    <table cellspacing="0">
       <tr>
-        <th>Namn</th>
-        <th>Personnummer</th>
-        <th>Kortnummer</th>
-        <th>Forskarskåp</th>
+        <th>Namn </th>
+        <th>Personnummer </th>
+        <th> Kortnummer </th>
+        <th> Forskarskåp</th>
       </tr>
 
       <% @people.each do |person| %>
         <% @locker = Locker.find(person.locker_id) %>
-        <tr class = "index">
-          <td><%= person.name %></td>
-          <td><%= person.personnbr %></td>
-          <td><%= person.cardnbr %></td>
-          <td><%= @locker.number %></td>
+        <tr class = "index" id = "index_entry">
           <td>
             <%= form_tag(people_path, :method => "get") do %>
               <%= hidden_field_tag :show, value = person.id %>
-              <%= submit_tag "Visa"  %>
+              <%= submit_tag person.name, :style=> 'background-color: transparent;  width:100%; border: none; font-family: serif; font-size: 16px; text-align: left;' %>
+            <% end %>
+          </td>
+          
+          <td>
+            <%= form_tag(people_path, :method => "get") do %>
+              <%= hidden_field_tag :show, value = person.id %>
+              <%= submit_tag person.personnbr, :style=> 'background-color: transparent;  width:100%; border: none; font-family: serif; font-size: 16px; text-align: left;' %>
+            <% end %>
+          </td>
+          <td>
+            <%= form_tag(people_path, :method => "get") do %>
+              <%= hidden_field_tag :show, value = person.id %>
+              <%= submit_tag person.cardnbr, :style=> 'background-color: transparent;  width:100%; border: none; font-family: serif; font-size: 16px; text-align: left;' %>
+            <% end %>
+          </td>
+          
+          <td>
+            <%= form_tag(people_path, :method => "get") do %>
+              <%= hidden_field_tag :show, value = person.id %>
+              <%= submit_tag @locker.number, :style=> 'background-color: transparent;  width:100%; border: none; font-family: serif; font-size: 16px; text-align: left;' %>
             <% end %>
           </td>
         </tr>
