@@ -81,31 +81,23 @@ class PeopleController < ApplicationController
     @person = Person.new(person_params)
     
     if !@person.personnbr.blank?
-      @existing = Person.where(personnbr: @person.personnbr).first
-      
-      if !@existing
-      
-        @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?pnr=" + @person.personnbr + "&key=!kk889fr!"
-        @gundaPerson = @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
+      @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?pnr=" + @person.personnbr + "&key=!kk889fr!"
+      @gundaPerson = @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
 
-        if @gundaPerson[:name]
-          @person.name = @gundaPerson[:name].force_encoding('UTF-8')
-          @person.cardnbr = @gundaPerson[:card_number]
-          @person.registrationDate = Date.today
-
-          if @person.save
-            $selected = @person.id
-            redirect_to people_path
-          else
-            render 'new'
-          end
-
+      if @gundaPerson[:name]
+        @person.name = @gundaPerson[:name].force_encoding('UTF-8')
+        @person.cardnbr = @gundaPerson[:card_number]
+        @person.registrationDate = Date.today
+        
+        if @person.save
+          $selected = @person.id
+          redirect_to people_path
         else
-          @person.errors.add(@person.personnbr, "Person med detta personnummer finns inte registrerat i bibliotekets system")
           render 'new'
         end
+
       else
-        @person.errors.add(@person.personnbr, "Denna person är redan registrerad i systemet")
+        @person.errors.add(@person.personnbr, "Person med detta personnummer finns inte registrerat i bibliotekets system")
         render 'new'
       end
       
