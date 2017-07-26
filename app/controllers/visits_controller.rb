@@ -65,6 +65,18 @@ class VisitsController < ApplicationController
     end
     
   end
+  
+  
+  def destroy
+    puts "DOOOOOOOOOOEEEEEEEEEEEES GOOOOOOOOOOOOOOOO HEEEEEEEEEEEEERRRRRRRRRRRRRRRREEEEEEEEEEEEEE?"
+    
+    @visit = Visit.find(params[:id])
+    
+        
+    @visit.delete
+    
+    redirect_to people_path
+  end
 
   
 end

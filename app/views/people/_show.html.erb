@@ -49,11 +49,17 @@
 
     <table id = "visits_table" cellspacing="0">
       <tr>
+        <th class="visits"></th>
         <th class="visits">Besök:</th>
       </tr>
 
       <% @visits.each do |visit| %>
         <tr class="visits">
+          <td> 
+            <%= link_to 'x', visit_path(visit.id),
+                  method: :delete,
+                  data: { confirm: 'Bekräfta borttagning' }, :style=> 'text-decoration: none; color: black; font-family: sans-serif; border: 1px solid darkslateblue; border-radius: 2px; padding-left: 5px; padding-right: 4px;' %>
+          </td>
           <td><%= visit.date %></td>
         </tr>
       <% end %>
