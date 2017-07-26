@@ -42,7 +42,6 @@ class VisitsController < ApplicationController
     
     redirect_to action: :new
   end
-  
 
   
 end

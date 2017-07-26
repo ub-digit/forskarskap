@@ -1,30 +1,26 @@
 <div id = "edit_screen">
 
-<h1> Information uppdaterades </h1>
-
-<p> Personlig information för
-  <strong> <%= @person.name %> </strong>
-  uppdaterades utifrån bibliotekets databas</p> 
-
-
-<%= form_for @person do |f| %>
-
-  <p>
-      Byt forskarskåp: <br>
-      <% @available = Locker.listAvailable(@person.locker_id) %>
-      <%= f.collection_select :locker_id, @available, :id, :number %>
-  </p>
-
+  <h1> Information uppdaterades </h1>
   
+    
   <%= link_to 'Tillbaka', people_path, :style=> 'display: inline-block; color: blue; font-size: 17px;' %>
-  
-  &nbsp;|
 
-  <p id= "update_user">
-    <%= f.submit "Spara forskarskåp", :style=> 'background-color: transparent; border: none; font-family: serif; font-size: 17px; text-decoration: underline; color: blue; cursor: pointer' %>
-  </p>
+  <p> Personlig information för
+    <strong> <%= @person.name %> </strong>
+    uppdaterades utifrån bibliotekets databas</p> 
 
-<% end %>
 
+  <%= form_for @person do |f| %>
+
+    <p>
+        Byt forskarskåp: <br>
+        <% @available = Locker.listAvailable(@person.locker_id) %>
+        <%= f.collection_select :locker_id, @available, :id, :number %>
+    </p>
+    <p id= "update_user">
+      <%= f.submit "Spara skåp"%>
+    </p>
+
+  <% end %>
   
 </div>

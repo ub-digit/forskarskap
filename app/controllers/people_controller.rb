@@ -76,6 +76,8 @@ class PeopleController < ApplicationController
   
   def edit
     @person = Person.updatePerson(params[:id])
+    
+    @visit = Visit.new
   end
   
   
