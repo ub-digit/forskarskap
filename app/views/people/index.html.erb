@@ -1,8 +1,10 @@
 <div id = "header">
   <h1 id = "header_title">Forskarskåpshanteraren</h1>
-  
-  <div id="new_link">
-    <%= link_to 'Lägg till ny person', new_person_path, :style=> 'text-decoration:none; color: black' %>
+  <div id = header_right>
+    <b id = "nbrOfPeople" > Antal inskrivna: <%= @nbrOfPeople %> </b>
+    <div id="new_link">
+      <%= link_to 'Lägg till ny person', new_person_path, :style=> 'text-decoration:none; color: black' %>
+    </div>
   </div>
 </div>
 

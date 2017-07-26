@@ -20,14 +20,24 @@
   float: left;
 }
 
-#new_link{
+#nbrOfPeople{
   float: right;
+}
+
+#header_right{
+  float: right;
+  margin-right: 10px;
+  margin-top: 10px;
+  height: 90%;
+}
+
+#new_link{
   padding: 3px;
   border: 1px outset darkslateblue;
   border-radius: 2px;
   background-color: #f2f2f2;
-  margin-right: 10px;
-  margin-top: 45px;
+  margin-top: 25%;
+
 }
 
 #new_link:hover{
@@ -101,6 +111,8 @@ th.visits{
   background-color: darkslateblue;
   color: white;
 }
+
+tr.visits:nth-child(even) {background-color: #f2f2f2}
 
 #visits_table{
   width: 100%;

@@ -64,6 +64,8 @@ class PeopleController < ApplicationController
         
     end
     
+    @nbrOfPeople = Person.all.count
+    
   end
   
   
