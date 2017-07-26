@@ -11,17 +11,14 @@ class VisitsController < ApplicationController
   
   def create
     
-    #Visit is created by 
-    if params[:date_year].present?
-      
-      puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKEEEEEEEEEEEEEEEEEEEEEEEE"
-      puts params[:date_year] 
-      
+    #Visit is created by admin with a given date and person id
+    if params[:person_id].present?
       @person = Person.find(params[:person_id])
       @year = params[:date_year].to_i
       @month = params[:date_month].to_i
       @day = params[:date_day].to_i
-      if @year
+      
+      if @year != 0 && @month != 0 && @day != 0
         if @person 
           @visit = @person.visits.new
           @visit.date = Date.new(@year, @month, @day)
@@ -31,7 +28,7 @@ class VisitsController < ApplicationController
       end
       redirect_to people_path
 
-
+    #Visit is created by user with given cardnumber, and date is today
     else
 
       if params[:cardnbr].present?
