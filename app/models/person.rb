@@ -46,9 +46,15 @@ class Person < ApplicationRecord
     @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
   
     if @gundaPerson[:name]
-      @person = Person.where(personnbr: @gundaPerson[:person_number]).first; 
-      @person.update_attributes(:name => @gundaPerson[:name].force_encoding('UTF-8'), :cardnbr => @gundaPerson[:card_number])
+      @person = Person.where(personnbr: @gundaPerson[:person_number]).first;
+      if @person 
+        @person.update_attributes(:name => @gundaPerson[:name].force_encoding('UTF-8'), :cardnbr => @gundaPerson[:card_number])
+      else
+        @person = Person.new
+      end
+      
       return @person
+      
     else
       return nil
     end

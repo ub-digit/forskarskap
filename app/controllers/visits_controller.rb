@@ -13,7 +13,6 @@ class VisitsController < ApplicationController
       @person = Person.findGundaPerson(params[:cardnbr])
       
       if @person != nil
-        
         if @person.locker_id != nil
         
           @duplicate = Visit.where(["date = ? and person_id = ?", Date.today, @person.id]).take
