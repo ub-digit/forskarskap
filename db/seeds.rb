@@ -22,3 +22,8 @@ Locker.create(number: '7A')
 Locker.create(number: '7B')
 Locker.create(number: '8A')
 Locker.create(number: '8B')
+
+Person.create(name: "Karlsson, Extern", personnbr: 2862625055, cardnbr: "000", registrationDate: Date.today, locker_id: 1)
+
+Person.create(name: "Danielsson", personnbr: "19580929gg", cardnbr: "111", registrationDate: Date.today, locker_id: 2)
+
