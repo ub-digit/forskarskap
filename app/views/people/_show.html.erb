@@ -44,21 +44,36 @@
   
 </div>
 
-<div id = "visits_info">
-  
-  <table id = "visits_table" cellspacing="0">
-    <tr>
-      <th class="visits">Besök:</th>
-    </tr>
+<div id = "visits">
+  <div id = "visits_info">
 
-    <% @selected.visits.each do |visit| %>
-      <tr class="visits">
-        <td><%= visit.date %></td>
+    <table id = "visits_table" cellspacing="0">
+      <tr>
+        <th class="visits">Besök:</th>
       </tr>
-    <% end %>
-  </table>
 
+      <% @visits.each do |visit| %>
+        <tr class="visits">
+          <td><%= visit.date %></td>
+        </tr>
+      <% end %>
+    </table>
+
+  </div>
+  
+  <div id = "add_visit">
+    <%= form_tag('/visits', :method => "create") do %>
+      <%= text_field_tag :date_year, params[:date_year], :value=> Date.today.year, :style=> 'width: 40px;' %>
+      <%= text_field_tag :date_month, params[:date_month], :value=> Date.today.month, :style=> 'width: 20px;' %>
+      <%= text_field_tag :date_day, params[:date_day], :value=> Date.today.day, :style=> 'width: 20px;' %>
+      <%= hidden_field_tag :person_id, params[:person_id], :value=>@selected.id %>
+      <%= submit_tag "Skapa Besök", :style=> 'margin-top: 5px;' %>
+    <% end %>
+  </div>
+  
 </div>
+
+
 
 <div id = bottom_links>
   
@@ -72,3 +87,7 @@
   </div>
   
 </div>
+
+
+
+  

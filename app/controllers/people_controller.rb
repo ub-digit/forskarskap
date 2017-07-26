@@ -31,6 +31,7 @@ class PeopleController < ApplicationController
     #The parameters sent to the html file for which person is shown is given a value
     if Person.exists?($selected) #Since if a person is removed they're still set as $selected
       @selected = Person.find($selected)
+      @visits = @selected.visits.sort_by &:date
       @selectedLocker = Locker.where(id: @selected.locker_id).first
       @nbrOfVisits = @selected.visits.count
       @countingFrom = Date.today - 30

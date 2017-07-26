@@ -99,7 +99,14 @@ header > h2 {
 header span { margin-left: 20px; }
 
 
+
+
 //Div that contains the list of visits a person has made
+
+#visits{
+  float: right;
+  height: 500px;
+}
 
 #visits_info{
   float: right;
@@ -124,11 +131,21 @@ tr.visits:nth-child(even) {background-color: #f2f2f2}
 }
 
 
+#add_visit{
+  height: 50px;
+  width: 125px;
+  margin-top: 410px;
+  text-align: center;
+}
+
+
+
+
 
 #bottom_links{
   margin-top: 376px;
   //margin-right: 100px;
-  max-width: 70%;
+  max-width: 85%;
 }
 
 #delete_link{
@@ -151,9 +168,13 @@ tr.visits:nth-child(even) {background-color: #f2f2f2}
   border-radius: 2px;
   background-color: #f2f2f2;
 }
+
 #edit_link:hover{
     background-color: lightsteelblue;
 }
+
+
+
 
 
 //NEW USER
