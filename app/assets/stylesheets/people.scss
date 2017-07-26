@@ -151,4 +151,40 @@ tr.visits:nth-child(even) {background-color: #f2f2f2}
 }
 
 
+//NEW USER
 
+#new_user_screen{
+  text-align: center;
+  width: 30%;
+  margin-left: 35%;
+  margin-top: 100px;
+}
+
+#new_user_errors{
+  border: 2px solid;
+  border-radius: 5px;
+  
+  background-color: cornsilk;
+  border-color: darksalmon;
+  color: crimson;
+}
+
+
+
+#save_user{
+  display: inline-block;
+}
+
+
+//EDIT SCREEN
+
+#edit_screen{
+  text-align: center;
+  width: 30%;
+  margin-left: 35%;
+  margin-top: 100px;
+}
+
+#update_user{
+  display: inline-block;
+}

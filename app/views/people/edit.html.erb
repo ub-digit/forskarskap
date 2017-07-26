@@ -1,9 +1,10 @@
+<div id = "edit_screen">
 
-
+<h1> Information uppdaterades </h1>
 
 <p> Personlig information för
   <strong> <%= @person.name %> </strong>
-  uppdaterades</p> 
+  uppdaterades utifrån bibliotekets databas</p> 
 
 
 <%= form_for @person do |f| %>
@@ -14,12 +15,16 @@
       <%= f.collection_select :locker_id, @available, :id, :number %>
   </p>
 
+  
+  <%= link_to 'Tillbaka', people_path, :style=> 'display: inline-block; color: blue; font-size: 17px;' %>
+  
+  &nbsp;|
 
-  <p>
-    <%= f.submit "Spara forskarskåp"%>
+  <p id= "update_user">
+    <%= f.submit "Spara forskarskåp", :style=> 'background-color: transparent; border: none; font-family: serif; font-size: 17px; text-decoration: underline; color: blue; cursor: pointer' %>
   </p>
 
 <% end %>
 
- 
-<%= link_to 'Tillbaka', people_path %>
+  
+</div>

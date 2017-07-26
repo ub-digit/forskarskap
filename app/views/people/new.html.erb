@@ -1,39 +1,47 @@
-<h1>Lägg till ny användare</h1>
 
-<%= form_for @person do |f| %>
-  <% if @person.errors.any? %>
-    <div id="error_explanation">
-      <table id = "visits_table">
-        <%@person.errors.messages.values.each do |msg| %>
-          <tr>
-            <%msg.each do  |m| %>
-              <td><%= m %></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </table>
+<div id = "new_user_screen">
+  <h1>Lägg till ny användare</h1>
 
-    </div>
+  <%= form_for @person do |f| %>
+    <% if @person.errors.any? %>
+      <div id="new_user_errors">
+        <table id = "visits_table">
+          <%@person.errors.messages.values.each do |msg| %>
+            <tr>
+              <%msg.each do  |m| %>
+                <td><%= m %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </table>
+
+      </div>
+    <% end %>
+
+    <p>
+      <%= f.label :Personnummer %><br>
+      <%= f.text_field :personnbr %>
+    </p>
+
+    <p>
+      <%= f.label :Forskarskåp %><br>
+      <% @available = Locker.listAvailable(@person.locker_id) %>
+      <%= f.collection_select :locker_id, @available, :id, :number %>
+    </p>
+
+  
+    <%= link_to 'Tillbaka', people_path, :style=> 'display: inline-block; color: blue; font-size: 17px;' %>
+  
+    &nbsp;|
+  
+    <p id = "save_user">
+      <%= f.submit "Spara användare", :style=> 'background-color: transparent; border: none; font-family: serif; font-size: 17px; text-decoration: underline; color: blue; cursor: pointer' %>
+    </p>
+  
+    
+
   <% end %>
 
-  <p>
-    <%= f.label :Personnummer %><br>
-    <%= f.text_field :personnbr %>
-  </p>
-
-  <p>
-    <%= f.label :Forskarskåp %><br>
-    <% @available = Locker.listAvailable(@person.locker_id) %>
-    <%= f.collection_select :locker_id, @available, :id, :number %>
-  </p>
   
-  <p>
-    <%= f.submit "Spara användare"%>
-  </p>
-
-<% end %>
-
-
-
-
-<%= link_to 'Tillbaka', people_path %>
+  
+</div>
