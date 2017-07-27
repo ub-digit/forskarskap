@@ -6,24 +6,82 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Locker.create(number: '1A')
-Locker.create(number: '1B')
-Locker.create(number: '2A')
-Locker.create(number: '2B')
-Locker.create(number: '3A')
-Locker.create(number: '3B')
-Locker.create(number: '4A')
-Locker.create(number: '4B')
-Locker.create(number: '5A')
-Locker.create(number: '5B')
-Locker.create(number: '6A')
-Locker.create(number: '6B')
-Locker.create(number: '7A')
-Locker.create(number: '7B')
-Locker.create(number: '8A')
-Locker.create(number: '8B')
 
-Person.create(name: "Karlsson, Extern", personnbr: 2862625055, cardnbr: "000", registrationDate: Date.today, locker_id: 1)
+#------------------------------------------CLEARING OLD DATA------------------------------------------
+Locker.delete_all
+Visit.delete_all
+Person.delete_all
 
-Person.create(name: "Danielsson", personnbr: "19580929gg", cardnbr: "111", registrationDate: Date.today, locker_id: 2)
+
+
+#------------------------------------------PEOPLE AND LOCKERS-----------------------------------------
+
+
+@reading = File.read("public/INDEX.LST").force_encoding('UTF-8')
+
+if ! @reading.valid_encoding?
+  @reading = @reading.encode("UTF-16be", :invalid=>:replace, :replace=>"?").encode('UTF-8')
+  @reading.gsub(/dr/i,'med')
+end
+
+@data = @reading.split(/\n+/)
+
+@data.each do |entry|
+  eArr = entry.split('?') 
+  s = eArr.count
+  # name=eArr[0...s-4] cardNbr=eArr[s-3] lockerNbr=eArr[s-2] registrationDate=eArr[s-1]
+  
+  
+  #CREATING LOCKERS
+  Locker.create(number: eArr[s-2])
+
+
+  #CREATING PEOPLE
+  @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?cnr=" + eArr[s-3] + "&key=!kk889fr!"
+  @gp = eval(Net::HTTP.get(URI(@searchString)))[:patron]
+  
+  @date = Date.strptime(eArr[s-1], '%m-%d-%Y')
+  @locker = Locker.where(number: eArr[s-2]).first
+
+  if @gp[:name] && @date && @locker
+    Person.create(name: @gp[:name].force_encoding('UTF-8'), personnbr: @gp[:person_number], cardnbr: @gp[:card_number], registrationDate: @date, locker_id: @locker.id)
+  end
+
+  
+end
+
+
+
+#----------------------------------------VISITS----------------------------------------------
+
+
+@reading = File.read("public/LOGG.LST").force_encoding('UTF-8')
+
+if ! @reading.valid_encoding?
+  @reading = @reading.encode("UTF-16be", :invalid=>:replace, :replace=>"?").encode('UTF-8')
+  @reading.gsub(/dr/i,'med')
+end
+
+@data = @reading.split(/\n+/)
+
+@data.each do |entry|
+  eArr = entry.split('?') #cardnbr = eArr[0] date=eArr[1]
+  
+  @person = Person.where(cardnbr: eArr[0]).first
+  @date = Date.strptime(eArr[1], '%m-%d-%Y')
+  
+  if @person && @date
+    @duplicate = Visit.where(["date = ? and person_id = ?", @date, @person.id]).take
+    
+    if !@duplicate
+      Visit.create(date: @date, person_id: @person.id)
+      #puts @date
+    end
+    
+  end
+  
+
+end
+
+
 
