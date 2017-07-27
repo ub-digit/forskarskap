@@ -15,7 +15,7 @@
 
   <%= form_tag(people_path, :method => "get", id: "search-form") do %>
 
-    <%= select_tag :search_by, options_for_select(['Namn','Personnummer','Lånekortsnummer','Forskarskåp'], @search_by), :style=> 'width: 30%; margin-left: 2px' %>
+    <%= select_tag :search_by, options_for_select(['Namn','Personnummer','Lånekortsnummer','Forskarskåp', 'Antal besök'], @search_by), :style=> 'width: 30%; margin-left: 2px' %>
 
     <%= text_field_tag :search, @search, placeholder: "Sök", :style=> 'width: 50%;' %>
     <%= submit_tag "Search", :style=> 'width: 16%;' %>

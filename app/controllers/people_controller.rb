@@ -47,6 +47,9 @@ class PeopleController < ApplicationController
         @people = Person.all.order(:personnbr)
       elsif $search_by == "Lånekortsnummer"
         @people = Person.all.order(:cardnbr)
+      elsif $search_by == "Antal besök"
+        @p = Person.all
+        @people = @p.sort { |x,y| x.visits.count <=> y.visits.count }
       else
         @people = Person.all.order(:locker_id)
       end
@@ -61,6 +64,9 @@ class PeopleController < ApplicationController
         @people = Person.search_cardnbr($search).order(:cardnbr)
       elsif $search_by == "Forskarskåp"
         @people = Person.search_locker($search)
+      else
+        @p = Person.all
+        @people = @p.sort { |x,y| x.visits.count <=> y.visits.count }
       end
         
     end
