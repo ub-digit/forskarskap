@@ -68,13 +68,8 @@ class VisitsController < ApplicationController
   
   
   def destroy
-    puts "DOOOOOOOOOOEEEEEEEEEEEES GOOOOOOOOOOOOOOOO HEEEEEEEEEEEEERRRRRRRRRRRRRRRREEEEEEEEEEEEEE?"
-    
-    @visit = Visit.find(params[:id])
-    
-        
+    @visit = Visit.find(params[:id])  
     @visit.delete
-    
     redirect_to people_path
   end
 

@@ -1,4 +1,6 @@
 class PeopleController < ApplicationController
+  http_basic_authenticate_with name: "admin", password: "secret2"
+  
   #To keep the search results and the description of a person showing even if you reload the page
   $search_by = ""
   $search = ""
