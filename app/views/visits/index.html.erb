@@ -1,28 +1,58 @@
-<h1> Statistik: </h1>
+<div id="stats_header">
+  <h1> Statistik: </h1>
 
-<h2> Högst antal besök/dag:</h2>
-<%= form_tag(visits_path, :method => "get", id: "max_visits_timespan") do %>
-    <%= label_tag "Startdatum:" %> <br>
-    <%= text_field_tag :start_date, params[:start_date], placeholder: "ÅÅÅÅMMDD", :style=> 'margin-bottom: 5px;' %> <br>
-    <%= label_tag "Slutdatum" %> <br>
-    <%= text_field_tag :end_date, params[:end_date], placeholder: "ÅÅÅÅMMDD" %> <br>
-    <%= submit_tag "Sök", :style=> 'margin-top: 10px;' %>
-  <% end %> <br>
+  <b><%= @error %> </b>
+</div>
 
 
-<b><%= @error %> </b>
+<div id="stats_single">
+  <h2> Antal besök:</h2>
+  <%= form_tag(visits_path, :method => "get", id: "max_visits_timespan") do %>
+      <%= label_tag "Datum" %> <br>
+      <%= text_field_tag :date, params[:date], placeholder: "ÅÅÅÅMMDD" %> <br>
+      <%= submit_tag "Sök", :style=> 'margin-top: 10px;' %>
+    <% end %> <br>
 
-<% if @maxAmount != nil%>
 
-  <b> Resultat: </b>
-  <p> 
-  Flest besök per dag under denna tidsperiod var 
-  <strong><%= @maxAmount %></strong>
-  st
-  </p>
+  <% if @nbrVisits != nil%>
 
-<% end %>
+    <b> Resultat: </b>
+    <p> 
+    Antalet besök under denna dag var 
+    <strong><%= @nbrVisits%></strong>
+    st
+    </p>
 
-<%= link_to 'Tillbaka', people_path %>
+  <% end %>
+  
+</div>
+
+
+<div id="stats_span">
+  <h2> Högst antal besök/dag:</h2>
+  <%= form_tag(visits_path, :method => "get", id: "max_visits_timespan") do %>
+      <%= label_tag "Startdatum:" %> <br>
+      <%= text_field_tag :start_date, params[:start_date], placeholder: "ÅÅÅÅMMDD", :style=> 'margin-bottom: 5px;' %> <br>
+      <%= label_tag "Slutdatum" %> <br>
+      <%= text_field_tag :end_date, params[:end_date], placeholder: "ÅÅÅÅMMDD" %> <br>
+      <%= submit_tag "Sök", :style=> 'margin-top: 10px;' %>
+    <% end %> <br>
+
+
+  <% if @maxAmount != nil%>
+
+    <b> Resultat: </b>
+    <p> 
+    Flest besök per dag under denna tidsperiod var 
+    <strong><%= @maxAmount %></strong>
+    st
+    </p>
+
+  <% end %>
+</div>
+
+<div id = "stats_back">
+  <%= link_to 'Tillbaka', people_path%>
+</div>
 
 

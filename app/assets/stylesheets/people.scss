@@ -4,7 +4,7 @@
 
 #header{
   width: 100%;
-  height: 80px;
+  height: 100px;
   margin-bottom: 20px;
   background-color: darkslateblue;
   color: #f2f2f2;
@@ -36,7 +36,8 @@
   border: 1px outset darkslateblue;
   border-radius: 2px;
   background-color: #f2f2f2;
-  margin-top: 25%;
+  margin-top: 20%;
+  text-align: center;
 }
 
 #new_link:hover{
@@ -48,7 +49,8 @@
   border: 1px outset darkslateblue;
   border-radius: 2px;
   background-color: #f2f2f2;
-  float: left;
+  float: right;
+  margin-top: 5px;
 }
 
 #statistics_link:hover{

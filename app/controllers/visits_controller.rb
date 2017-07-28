@@ -8,6 +8,17 @@ class VisitsController < ApplicationController
   end
   
   def index
+    if !params[:date].blank?
+      begin
+        @date = Date.parse(params[:date])
+        @nbrVisits =  Visit.where(["date = ?", @date]).count
+         
+      rescue ArgumentError
+        @error = "Vänligen skriv datumet i formen ÅÅÅÅMMDD"
+      end
+    end
+    
+    
     if !params[:start_date].blank? && !params[:end_date].blank?
       begin
         @startDate = Date.parse(params[:start_date])
