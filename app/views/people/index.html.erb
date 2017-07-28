@@ -31,6 +31,7 @@
 
       <% @people.each do |person| %>
         <% @locker = Locker.find(person.locker_id) %>
+      
         <tr class = "index" id = 'P_<%= person.id %>'>
           <td>
             <%= form_tag(people_path, :method => "get") do %>
@@ -65,12 +66,15 @@
 
 </div>
 
-<script>
-  $('#index_list').scrollTo($('#P_<%= @selected.id%>'));                        
-</script>
 
+<% if @selected !=nil%>
+  <script>
+    $('#index_list').scrollTo($('#P_<%= @selected.id%>'));                        
+  </script>
+  <script>
+    $('#P_<%=@selected.id%>').css('background-color', 'lightsteelblue');
+  </script>
 
-<% if @selected != nil %>
   <%= render 'show' %>
 <% end %>
 
