@@ -1,0 +1,28 @@
+<h1> Statistik: </h1>
+
+<h2> Högst antal besök/dag:</h2>
+<%= form_tag(visits_path, :method => "get", id: "max_visits_timespan") do %>
+    <%= label_tag "Startdatum:" %> <br>
+    <%= text_field_tag :start_date, params[:start_date], placeholder: "ÅÅÅÅMMDD", :style=> 'margin-bottom: 5px;' %> <br>
+    <%= label_tag "Slutdatum" %> <br>
+    <%= text_field_tag :end_date, params[:end_date], placeholder: "ÅÅÅÅMMDD" %> <br>
+    <%= submit_tag "Sök", :style=> 'margin-top: 10px;' %>
+  <% end %> <br>
+
+
+<b><%= @error %> </b>
+
+<% if @maxAmount != nil%>
+
+  <b> Resultat: </b>
+  <p> 
+  Flest besök per dag under denna tidsperiod var 
+  <strong><%= @maxAmount %></strong>
+  st
+  </p>
+
+<% end %>
+
+<%= link_to 'Tillbaka', people_path %>
+
+

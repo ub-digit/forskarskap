@@ -37,10 +37,21 @@
   border-radius: 2px;
   background-color: #f2f2f2;
   margin-top: 25%;
-
 }
 
 #new_link:hover{
+  background-color: lightsteelblue;
+}
+
+#statistics_link{
+  padding: 3px;
+  border: 1px outset darkslateblue;
+  border-radius: 2px;
+  background-color: #f2f2f2;
+  float: left;
+}
+
+#statistics_link:hover{
   background-color: lightsteelblue;
 }
 

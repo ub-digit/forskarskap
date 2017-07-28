@@ -7,6 +7,28 @@ class VisitsController < ApplicationController
     @type = $type
   end
   
+  def index
+    if !params[:start_date].blank? && !params[:end_date].blank?
+      begin
+        @startDate = Date.parse(params[:start_date])
+        @endDate = Date.parse(params[:end_date])
+        @maxAmount = 0;
+        @current = @startDate
+        
+        while @current < @endDate
+          @amount =  Visit.where(["date = ?", @current]).count
+          if @amount > @maxAmount
+            @maxAmount = @amount
+          end
+          @current = @current + 1.day
+        end
+      rescue ArgumentError
+        @error = "Vänligen skriv datumet i formen ÅÅÅÅMMDD"
+      end
+    end
+    
+  end
+  
   
   
   def create

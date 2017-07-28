@@ -71,6 +71,12 @@ end
   @date = Date.strptime(eArr[1], '%m-%d-%Y')
   
   if @person && @date
+    
+    if @date < @person.registrationDate
+      Person.update(@person.id, :registrationDate => @date)
+    end
+    
+    
     @duplicate = Visit.where(["date = ? and person_id = ?", @date, @person.id]).take
     
     if !@duplicate
