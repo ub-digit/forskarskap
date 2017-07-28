@@ -75,7 +75,6 @@ end
     
     if !@duplicate
       Visit.create(date: @date, person_id: @person.id)
-      #puts @date
     end
     
   end

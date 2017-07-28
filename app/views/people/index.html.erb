@@ -8,9 +8,6 @@
   </div>
 </div>
 
-
-
-
 <div id = "index_side">
 
   <%= form_tag(people_path, :method => "get", id: "search-form") do %>
@@ -21,6 +18,8 @@
     <%= submit_tag "Search", :style=> 'width: 16%;' %>
   <% end %>
 
+  
+  
   <div id = "index_list">
     <table cellspacing="0">
       <tr>
@@ -32,7 +31,7 @@
 
       <% @people.each do |person| %>
         <% @locker = Locker.find(person.locker_id) %>
-        <tr class = "index" id = "index_entry">
+        <tr class = "index" id = 'P_<%= person.id %>'>
           <td>
             <%= form_tag(people_path, :method => "get") do %>
               <%= hidden_field_tag :show, value = person.id %>
@@ -65,6 +64,10 @@
   </div>
 
 </div>
+
+<script>
+  $('#index_list').scrollTo($('#P_<%= @selected.id%>'));                        
+</script>
 
 
 <% if @selected != nil %>

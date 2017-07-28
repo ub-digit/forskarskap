@@ -65,14 +65,14 @@
 }
 
 #index_list{
-  overflow-x: auto;
+  overflow-y: auto;
   max-height: 90%;
   margin-top: 10px;
 }
 
 tr.index:nth-child(even) {background-color: #f2f2f2}
 
-#index_entry:hover {
+tr.index:hover {
   background-color:  lightsteelblue;
 }
 

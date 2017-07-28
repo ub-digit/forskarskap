@@ -10,7 +10,7 @@ class PeopleController < ApplicationController
   
   def index
     @people = Person.all
-    
+
     #If a search was made, the search-by parameter is updated
     if params[:search_by]
       $search_by = params[:search_by]
@@ -67,15 +67,33 @@ class PeopleController < ApplicationController
       elsif $search_by == "Forskarskåp"
         @people = Person.search_locker($search)
       else
+        @nbrOfMonths = $search.to_i
         @p = Person.all
-        @people = @p.sort { |x,y| x.visits.count <=> y.visits.count }
+        if @nbrOfMonths > 0
+          @people = @p.sort { |x,y| countInterval(x, @nbrOfMonths) <=> countInterval(y, @nbrOfMonths) }
+        else
+          @people = nil;
+        end
       end
         
     end
     
     @nbrOfPeople = Person.all.count
-    
   end
+  
+  #Help method that counts the number of visits a person has during the last given number of months
+  def countInterval(person, nbrOfMonths)
+    @count = 0;
+    @date = Date.today - 30*nbrOfMonths
+    person.visits.each do |visit|
+      if visit.date > @date
+        @count = @count+1
+      end
+    end
+    return @count;
+  end
+  
+  
   
   
   def new
