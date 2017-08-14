@@ -14,7 +14,24 @@ Person.delete_all
 
 
 
-#------------------------------------------PEOPLE AND LOCKERS-----------------------------------------
+#-----------------------------------------------LOCKERS-----------------------------------------------
+
+@reading = File.read("public/LOCKERS.LST").force_encoding('UTF-8')
+
+if ! @reading.valid_encoding?
+  @reading = @reading.encode("UTF-16be", :invalid=>:replace, :replace=>"?").encode('UTF-8')
+  @reading.gsub(/dr/i,'med')
+end
+
+@data = @reading.split(/\n+/)
+
+@data.each do |entry|
+  Locker.create(number: entry)
+end
+
+
+
+#-----------------------------------------------PEOPLE-----------------------------------------------
 
 
 @reading = File.read("public/INDEX.LST").force_encoding('UTF-8')
@@ -30,13 +47,8 @@ end
   eArr = entry.split('?') 
   s = eArr.count
   # name=eArr[0...s-4] cardNbr=eArr[s-3] lockerNbr=eArr[s-2] registrationDate=eArr[s-1]
-  
-  
-  #CREATING LOCKERS
-  Locker.create(number: eArr[s-2])
 
 
-  #CREATING PEOPLE
   @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?cnr=" + eArr[s-3] + "&key=!kk889fr!"
   @gp = eval(Net::HTTP.get(URI(@searchString)))[:patron]
   
@@ -45,6 +57,12 @@ end
 
   if @gp[:name] && @date && @locker
     Person.create(name: @gp[:name].force_encoding('UTF-8'), personnbr: @gp[:person_number], cardnbr: @gp[:card_number], registrationDate: @date, locker_id: @locker.id)
+  else
+    puts "PERSON ERROR: "
+    eArr.each do |i|
+      puts i
+    end
+    puts "|"
   end
 
   
@@ -87,6 +105,10 @@ end
   
 
 end
+
+
+
+
 
 
 
