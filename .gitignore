@@ -20,4 +20,38 @@
 /node_modules
 /yarn-error.log
 
+config/database.yml
+*~
+\#*#
+.#*
+*.*#
+
+# Ignore Aptana .project files.
+.project
+
+# Ignore all vim and vi backup files.
+*.sw*
+
+#Ignore nbproject
+nbproject/
+
+config/config_secret.yml
+config/passwd
+config/deploy.yml
+# Ignore generated css etc.
+.sass-cache/
+public/assets/
+
+# Ignore generated docs
+doc/app/
+
+#Ignore Gemfile.lock
+#Gemfile.lock
+
+# Ignore RVM gemset file
+.ruby-gemset
+
+#Ignore code climate coverage directory
+/coverage
+
 .byebug_history
