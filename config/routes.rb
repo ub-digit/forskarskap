@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get '/visits/new'
   
-  resources :people, :path => 'info'
+  resources :people, :path => 'stats'
   resources :visits
 
   

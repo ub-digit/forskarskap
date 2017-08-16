@@ -5,6 +5,10 @@ class VisitsController < ApplicationController
   
   def new
     @type = $type
+    puts request.remote_ip
+    if request.remote_ip != "127.0.0.1" && request.remote_ip != "130.241.18.64" && request.remote_ip != "130.241.35.135"
+      raise ActionController::RoutingError.new('Denied Access')
+    end
   end
   
   def index
@@ -44,6 +48,7 @@ class VisitsController < ApplicationController
   
   def create
     
+    
     #Visit is created by admin with a given date and person id
     if params[:person_id].present?
       @person = Person.find(params[:person_id])
@@ -61,6 +66,7 @@ class VisitsController < ApplicationController
       end
       redirect_to people_path
 
+      
     #Visit is created by user with given cardnumber, and date is today
     else
 
