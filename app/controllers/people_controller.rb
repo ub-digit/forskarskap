@@ -111,7 +111,8 @@ class PeopleController < ApplicationController
   def create
     @person = Person.new(person_params)
     
-    if !@person.personnbr.blank?
+    
+    if !@person.personnbr.blank? and @person.personnbr != "0"
       @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?pnr=" + @person.personnbr + "&key=!kk889fr!"
       @gundaPerson = @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
 
