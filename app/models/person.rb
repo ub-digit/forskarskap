@@ -1,3 +1,6 @@
+#A person has a name, personnumber, cardnumbed, id and locker_id. 
+#They also have several visits, which is modeled by each visit having a person_id
+#Represents a scientist in the library who which has a locker
 class Person < ApplicationRecord
   belongs_to :locker, optional: true
   has_many :visits
@@ -13,19 +16,22 @@ class Person < ApplicationRecord
   
   
   
-  
+  #Used to search for people that has a name that is or contains a given string
   def self.search_name(search)
     where("name LIKE ?", "%#{search}%")
   end
   
+  #Used to search for people that has a personnumber that is or contains a given string
   def self.search_personnbr(search)
     where("personnbr LIKE ?", "%#{search}%")
   end
   
+  #Used to search for people that has a card number that is or contains a given string
   def self.search_cardnbr(search)
     where("cardnbr LIKE ?", "%#{search}%")
   end
   
+  #Used to search for people that has a locker whos number is or contains a given string
   def self.search_locker(search)
     @lockers = Locker.where("number LIKE ?", "%#{search}%")
     @people = Array.new
@@ -40,7 +46,12 @@ class Person < ApplicationRecord
     return @people
   end
   
-  
+  #Looks up in GUNDA for the person who's cardnumber matches a given string
+  #Uses that persons personnumber to find corresponding person in this program's database
+  #Returns:
+  # Found person, if such exists (The person has a locker)
+  # A new empty person, if no such person exits (The person has no locker)
+  # Null, if no person matching the cardnumber is found in GUNDA (Something went wrong reading the card/they are not in the GUNDA-system)
   def self.findGundaPerson(cardNbr)
     if cardNbr == "0"
       return nil
@@ -64,7 +75,10 @@ class Person < ApplicationRecord
   end
   
   
-  
+  #Updates a person with a given ID by getting their information from GUNDA
+  #Returns:
+  # The updated person, if a person matching the ID is found
+  # Null, if no person matches
   def self.updatePerson(id) 
     @person = Person.find(id)
     if @person.personnbr

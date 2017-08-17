@@ -1,3 +1,6 @@
+#A locker has an id and a number
+#Also has a person assigned to it, modeled by a person having a locker_id
+#Represents one of the lockers available to scientists in the library
 class Locker < ApplicationRecord
   has_one :person
   
@@ -5,6 +8,7 @@ class Locker < ApplicationRecord
 
   
   
+  #Used to get a list of all lockers not assigned to a person
   def self.listAvailable(lockerId)
     @available = Array.new
     Locker.all.each do |locker|
@@ -24,6 +28,7 @@ class Locker < ApplicationRecord
   end
   
   
+  #Returns wether a locker with a given id is available or not
   def self.isAvailable(id)
     @person = Person.where(locker_id: id).first
     if(@person)
