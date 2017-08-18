@@ -100,7 +100,7 @@ class VisitsController < ApplicationController
         $type = "error"
       end
 
-      redirect_to action: :new
+      redirect_to '/'
     end
     
   end
