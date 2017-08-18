@@ -69,15 +69,25 @@
 
 #stats_single{
   float: left;
-  margin-left: 20%;
+  min-width: 200px;
+  max-width: 200px;
+  margin-left: 10%;
 }
 
 #stats_span{
   float: right;
-  margin-right: 20%;
+  min-width: 200px;
+  max-width: 200px;
+  margin-right: 10%;
+}
+
+#tot_stats_span{
+  float: right;
+  min-width: 200px;
+  max-width: 200px;
+  margin-right: 10%;
 }
 
 #stats_back{
-  margin-top: 300px;
   text-align: center;
 }

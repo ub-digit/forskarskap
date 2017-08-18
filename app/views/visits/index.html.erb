@@ -1,5 +1,9 @@
 <div id="stats_header">
   <h1> Statistik: </h1>
+  
+  <div id = "stats_back">
+    <%= link_to 'Tillbaka', people_path%>
+  </div>
 
   <b><%= @error %> </b>
 </div>
@@ -51,8 +55,31 @@
   <% end %>
 </div>
 
-<div id = "stats_back">
-  <%= link_to 'Tillbaka', people_path%>
+
+
+<div id="tot_stats_span">
+  <h2> Totalt antal besök:</h2>
+  <%= form_tag(visits_path, :method => "get", id: "tot_visits_timespan") do %>
+      <%= label_tag "Startdatum:" %> <br>
+      <%= text_field_tag :start_date_tot, params[:start_date_tot], placeholder: "ÅÅÅÅMMDD", :style=> 'margin-bottom: 5px;' %> <br>
+      <%= label_tag "Slutdatum" %> <br>
+      <%= text_field_tag :end_date_tot, params[:end_date_tot], placeholder: "ÅÅÅÅMMDD" %> <br>
+      <%= submit_tag "Sök", :style=> 'margin-top: 10px;' %>
+    <% end %> <br>
+
+
+  <% if @tot != nil%>
+
+    <b> Resultat: </b>
+    <p> 
+    Totalt antal besök under denna tidsperiod var 
+    <strong><%= @tot %></strong>
+    st
+    </p>
+
+  <% end %>
 </div>
+
+
 
 

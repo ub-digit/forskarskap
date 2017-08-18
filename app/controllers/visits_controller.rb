@@ -12,6 +12,7 @@ class VisitsController < ApplicationController
   end
   
   def index
+    
     if !params[:date].blank?
       begin
         @date = Date.parse(params[:date])
@@ -42,7 +43,27 @@ class VisitsController < ApplicationController
       end
     end
     
+    
+    
+    if !params[:start_date_tot].blank? && !params[:end_date_tot].blank?
+      begin
+        @startDate = Date.parse(params[:start_date_tot])
+        @endDate = Date.parse(params[:end_date_tot])
+        @tot = 0;
+        @current = @startDate
+        
+        while @current < @endDate
+          @tot = @tot + Visit.where(["date = ?", @current]).count
+          @current = @current + 1.day
+        end
+      rescue ArgumentError
+        @error = "Vänligen skriv datumet i formen ÅÅÅÅMMDD"
+      end
+    end
+    
   end
+  
+  
   
   
   
