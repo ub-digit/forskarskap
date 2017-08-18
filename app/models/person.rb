@@ -18,7 +18,7 @@ class Person < ApplicationRecord
   
   #Used to search for people that has a name that is or contains a given string
   def self.search_name(search)
-    where("name LIKE ?", "%#{search}%")
+    where("LOWER(name) LIKE LOWER(?)", "%#{search}%")
   end
   
   #Used to search for people that has a personnumber that is or contains a given string
@@ -33,7 +33,7 @@ class Person < ApplicationRecord
   
   #Used to search for people that has a locker whos number is or contains a given string
   def self.search_locker(search)
-    @lockers = Locker.where("number LIKE ?", "%#{search}%")
+    @lockers = Locker.where("LOWER(number) LIKE LOWER(?)", "%#{search}%")
     @people = Array.new
     
     @lockers.each do |locker|
