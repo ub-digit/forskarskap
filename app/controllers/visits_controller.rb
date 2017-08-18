@@ -100,7 +100,7 @@ class VisitsController < ApplicationController
         $type = "error"
       end
 
-      redirect_to '/'
+      redirect_to ''
     end
     
   end
