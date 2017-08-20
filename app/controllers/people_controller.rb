@@ -103,6 +103,9 @@ class PeopleController < ApplicationController
   
   def new
     @person=Person.new
+    $search_by = ""
+    $search = ""
+    $selected = ""
   end
   
   
