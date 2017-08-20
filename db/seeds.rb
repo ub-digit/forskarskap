@@ -8,9 +8,9 @@
 
 
 #------------------------------------------CLEARING OLD DATA------------------------------------------
-Locker.delete_all
 Visit.delete_all
 Person.delete_all
+Locker.delete_all
 
 
 
