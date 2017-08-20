@@ -67,12 +67,17 @@ class PeopleController < ApplicationController
       elsif $search_by == "Forskarskåp"
         @people = Person.search_locker($search)
       else
-        @nbrOfMonths = $search.to_i
-        @p = Person.all
-        if @nbrOfMonths > 0
-          @people = @p.sort { |x,y| countInterval(x, @nbrOfMonths) <=> countInterval(y, @nbrOfMonths) }
+        if $search == "0"
+          @p = Person.all
+          @people = @p.sort { |x,y| x.visits.count <=> y.visits.count }
         else
-          @people = nil;
+          @nbrOfMonths = $search.to_i
+          @p = Person.all
+          if @nbrOfMonths > 0
+            @people = @p.sort { |x,y| countInterval(x, @nbrOfMonths) <=> countInterval(y, @nbrOfMonths) }
+          else
+            @people = nil;
+          end
         end
       end
         
