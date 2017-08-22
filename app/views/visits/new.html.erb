@@ -2,6 +2,8 @@
 
 <div id="ub-autologin-menu-page-mkiosk"></div>
   
+
+
 <div id = "message_area">
     
   <% if @type == "confirmation" %>
@@ -23,6 +25,12 @@
   <% end %>
     
 </div>
+
+<script>
+    setTimeout(function() {
+      $('#message_area').fadeOut('fast');
+    }, 15000);                                                       
+</script>
   
   
 <div id = checkin_form >
