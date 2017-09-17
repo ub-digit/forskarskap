@@ -6,7 +6,7 @@ class VisitsController < ApplicationController
   def new
     @type = $type
     puts request.remote_ip
-    if request.remote_ip != "127.0.0.1" && request.remote_ip != "130.241.18.64" && request.remote_ip != "130.241.35.135"
+    if request.remote_ip != "127.0.0.1" && request.remote_ip != "130.241.18.64" && request.remote_ip != "130.241.35.135" && request.remote_ip != "130.241.19.19"
       raise ActionController::RoutingError.new('Denied Access')
     end
   end
