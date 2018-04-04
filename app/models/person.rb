@@ -57,7 +57,7 @@ class Person < ApplicationRecord
       return nil
     end
     
-    @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?cnr=" + cardNbr + "&key=!kk889fr!"
+    @searchString = "https://koha-intra.ub.gu.se/cgi-bin/koha/svc/members/forskreg-lookup?cnr=" + cardNbr + "&key=!kk889fr!"
     @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
   
     if @gundaPerson[:name]
@@ -82,7 +82,7 @@ class Person < ApplicationRecord
   def self.updatePerson(id) 
     @person = Person.find(id)
     if @person.personnbr
-      @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?pnr=" + @person.personnbr + "&key=!kk889fr!"
+      @searchString = "https://koha-intra.ub.gu.se/cgi-bin/koha/svc/members/forskreg-lookup?pnr=" + @person.personnbr + "&key=!kk889fr!"
       @gundaPerson =  eval(Net::HTTP.get(URI(@searchString)))[:patron]
       
       
