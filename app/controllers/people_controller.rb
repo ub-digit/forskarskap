@@ -121,7 +121,7 @@ class PeopleController < ApplicationController
     
     
     if !@person.personnbr.blank? and @person.personnbr != "0"
-      @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?pnr=" + @person.personnbr + "&key=!kk889fr!"
+      @searchString = "https://koha-intra.ub.gu.se/cgi-bin/koha/svc/members/forskreg-lookup?pnr=" + @person.personnbr + "&key=!kk889fr!"
       @gundaPerson = @gundaPerson = eval(Net::HTTP.get(URI(@searchString)))[:patron]
 
       if @gundaPerson[:name]
