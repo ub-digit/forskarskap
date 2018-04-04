@@ -49,7 +49,7 @@ end
   # name=eArr[0...s-4] cardNbr=eArr[s-3] lockerNbr=eArr[s-2] registrationDate=eArr[s-1]
 
 
-  @searchString = "https://sunda.ub.gu.se/cgi-bin/forskreg-lookup.cgi?cnr=" + eArr[s-3] + "&key=!kk889fr!"
+  @searchString = "https://koha-intra.ub.gu.se/cgi-bin/koha/svc/members/forskreg-lookup?cnr=" + eArr[s-3] + "&key=!kk889fr!"
   @gp = eval(Net::HTTP.get(URI(@searchString)))[:patron]
   
   @date = Date.strptime(eArr[s-1], '%m-%d-%Y')
