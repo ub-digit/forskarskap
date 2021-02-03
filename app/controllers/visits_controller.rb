@@ -4,11 +4,16 @@ class VisitsController < ApplicationController
   $type = ""
   
   def new
+    
     @type = $type
     puts request.remote_ip
-    if request.remote_ip != "127.0.0.1" && request.remote_ip != "130.241.18.64" && request.remote_ip != "130.241.35.135" && request.remote_ip != "130.241.19.19"
+
+   #if request.remote_ip != "127.0.0.1" && request.remote_ip != "130.241.18.64" && request.remote_ip != "130.241.35.135" && request.remote_ip != "130.241.19.19"
+    # The if line commented out above has been changed to the following line, when dockerizing
+    if !ENV["CHECK_IN_IPS"].split("||").include?(request.remote_ip)
       raise ActionController::RoutingError.new('Denied Access')
     end
+
   end
   
   def index

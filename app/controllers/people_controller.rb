@@ -1,5 +1,6 @@
 class PeopleController < ApplicationController
-  http_basic_authenticate_with name: "admin", password: "Ren4strom"
+  # Changed to using environment variables when dockerizing
+  http_basic_authenticate_with name: ENV["ADMIN_USER"], password: ENV["ADMIN_PASS"]
   
   #To keep the search results and the description of a person showing even if you reload the page
   $search_by = ""

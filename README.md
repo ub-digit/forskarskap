@@ -1,68 +1,32 @@
-# README
+# Dockerized Forskarskåpshanteraren (forskarskap)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The Docker specific files are located in the `docker` directory:
 
-Things you may want to cover:
+```
+docker
+├── .env.sample
+├── docker-compose.yml
+├── docker-entrypoint-initdb.d/
+│   └── .keep
+└── web/
+    ├── Dockerfile
+    ├── entrypoint.sh
+    └── .dockerignore
+```
 
-* Ruby version
+Use your real `.env` file instead of the `.env.sample` and follow the instructions below. 
 
-* System dependencies
+If you have access to the forskarskap image referred to in `docker-compose.yml`, just follow these steps:
 
-* Configuration
+1. Change directory to the `docker` directory.
+2. Copy your forskarskap sql dump file to `docker-entrypoint-initdb.d/`.
+3. Run `docker-compose up`, if you want to run forskarskap in the foreground, or `docker-compose up -d`, if you want to run it [d]etached.
 
-* Database creation
+If you have to build the forskarskap image yourself, start by doing the following:
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-=======
-# forskstat
-Statistics on researchers cupboards
-
-
-
-
-# Necessary information in case modification is to be done
-
----GUNDA---
-The application currently retrieves data from GUNDA at 
-
-  Controllers -> people_controller.rb in "create"
-  Models -> person.rb in "findGundaPerson" and "updatePerson" 
-  db -> seed.rb under "People"
-
-It gives either the personnumber or cardnumber and recieves the name, personnumber and cardnumber in return.
-
-Since GUNDA stores peoples personnumbers as YYMMDDXXXX, the applications database only allows this format. If a new database for the library is created with a different format, this restriction will need to be changed in Models -> person.rb.
-
-
----LOG IN---
-The login is a "http_basic_authenticate_with" located in Controllers -> people_controller.rb
-
-
----IP-LOCK---
-The IP-lock works through a simple if-case, in Controllers -> visits_controller.rb in "new"
-
-
----NEW LOCKERS---
-There is currently no way to add new lockers to the database through the application. The people using the application is aware of this, and may ask for some to be added. 
-
-
----SEED---
-OBS: The current SEED-file REMOVES all existing data in the database. DO NOT run it before modifying it.
-
-It also currently reads three files called LOCKERS.LST, INDEX.LST and LOGG.LST located in the "public" folder
-
-
-
-
-
+1. Change directory to the parent directory of the `docker` directory.
+2. Copy `docker/web/*` to the current directory.
+3. Add `docker` on a line of its own (and this `README.md` on a line of its own) in the `.dockerignore` file (optional).
+4. Run `docker build -t <your-choice-of-image-name-and-tag> .`.
+5. Change the name of the image for the `web` service in `docker-compose.yml` to `<your-choice-of-image-name-and-tag>`.
 
