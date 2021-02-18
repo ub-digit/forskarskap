@@ -4,13 +4,14 @@ services:
 
   web:
     image: ${IMAGE_WEB} 
-#   build: ./web/             # Only for development
+#   build: ../                # Only for development
     restart: always
     environment:
       - ADMIN_USER=${ADMIN_USER}
       - ADMIN_PASS=${ADMIN_PASS}
       - RAILS_ENV=${RAILS_ENV}
-      - SECRET_KEY_BASE=${RAILS_SECRET_KEY_BASE} # Not used in development
+      - RAILS_LOG_TO_STDOUT=${RAILS_LOG_TO_STDOUT} # Not used in development
+      - SECRET_KEY_BASE=${RAILS_SECRET_KEY_BASE}   # Not used in development
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_NAME=${DB_NAME}
@@ -19,7 +20,7 @@ services:
     ports:
       - "${EXPOSED_PORT_WEB}:${RAILS_PORT}"
     volumes:                  # Only for development
-      - ./web:/usr/src/app    # Only for development
+      - ../:/usr/src/app      # Only for development
     depends_on:
       - db
  
