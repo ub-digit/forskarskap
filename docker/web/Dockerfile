@@ -1,4 +1,4 @@
-FROM       ruby:2.3.1
+FROM       ruby:2.5.3
 
 # The location of the forskarskap app in the image
 ENV        APP_HOME=/usr/src/app/
@@ -41,4 +41,4 @@ RUN        chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 # Start the main process
-CMD        ["bundle", "exec", "rails", "server",  "-b", "0.0.0.0", "-e", "${RAILS_ENV}"]
+CMD        ["bundle", "exec", "rails", "server",  "-b", "0.0.0.0"]
