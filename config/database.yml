@@ -6,6 +6,7 @@ default: &default
   port:     <%= ENV["DB_PORT"] %>
   pool:     100
   timeout:  5000
+  template: template0
   username: <%= ENV["DB_USER"] %>
   password: <%= ENV["DB_PASS"] %>
 
