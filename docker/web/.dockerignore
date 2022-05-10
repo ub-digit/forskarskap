@@ -1,0 +1,11 @@
+.git
+.gitignore
+tmp
+log/*
+!log/.keep
+public/assets
+node_modules
+yarn.lock
+docker
+README.md
+
